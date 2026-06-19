@@ -42,9 +42,9 @@ export const CartProvider = ({ children }) => {
 
   const itemCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
   const itemsPrice = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const taxPrice = Number((itemsPrice * 0.18).toFixed(2));
+  const taxPrice = 0;
   const shippingPrice = itemsPrice > 999 ? 0 : 99;
-  const totalPrice = Number((itemsPrice + taxPrice + shippingPrice).toFixed(2));
+  const totalPrice = Number((itemsPrice + shippingPrice).toFixed(2));
 
   return (
     <CartContext.Provider value={{

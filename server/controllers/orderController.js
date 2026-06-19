@@ -96,18 +96,29 @@ export const payOrder = asyncHandler(async (req, res) => {
   }
 
   if (order.paymentMethod === 'stripe') {
-    // Create Stripe PaymentIntent
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Math.round(order.totalPrice * 100), // paise/cents
-      currency: 'lkr',
-      metadata: { orderId: order._id.toString() },
-    });
-    res.json({ clientSecret: paymentIntent.client_secret });
-  } else if (order.paymentMethod === 'cod') {
-    // COD: mark as payment result pending
+    try {
+      // Check if Stripe key is the default placeholder
+      if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.includes('replace_with_your_key')) {
+        res.status(400);
+        throw new Error('Stripe API Key is not configured. Please add a valid STRIPE_SECRET_KEY to your server .env file, or use Cash on Delivery (COD).');
+      }
+
+      // Create Stripe PaymentIntent
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(order.totalPrice * 100), // paise/cents
+        currency: 'lkr',
+        metadata: { orderId: order._id.toString() },
+      });
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (err) {
+      if (res.statusCode === 200) res.status(400);
+      throw new Error(err.message || 'Failed to initialize payment with Stripe.');
+    }
+  } else if (order.paymentMethod === 'cod' || order.paymentMethod === 'whatsapp') {
+    // WhatsApp/COD: mark as payment result pending
     order.paymentResult = {
-      id: `COD-${Date.now()}`,
-      status: 'COD',
+      id: `${order.paymentMethod.toUpperCase()}-${Date.now()}`,
+      status: order.paymentMethod === 'whatsapp' ? 'WhatsApp Confirmation Pending' : 'COD',
       update_time: new Date().toISOString(),
       email_address: req.user.email,
     };
@@ -163,7 +174,7 @@ export const updateOrderStatus = asyncHandler(async (req, res) => {
   if (orderStatus === 'Delivered') {
     order.isDelivered = true;
     order.deliveredAt = new Date();
-    if (order.paymentMethod === 'cod') {
+    if (order.paymentMethod === 'cod' || order.paymentMethod === 'whatsapp') {
       order.isPaid = true;
       order.paidAt = new Date();
     }

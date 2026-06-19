@@ -28,7 +28,7 @@ const orderSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     orderItems: [orderItemSchema],
     shippingAddress: shippingAddressSchema,
-    paymentMethod: { type: String, required: true, enum: ['stripe', 'cod'] },
+    paymentMethod: { type: String, required: true, enum: ['stripe', 'cod', 'whatsapp'] },
     paymentResult: paymentResultSchema,
     itemsPrice: { type: Number, required: true, default: 0 },
     taxPrice: { type: Number, required: true, default: 0 },
