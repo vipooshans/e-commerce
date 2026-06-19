@@ -34,8 +34,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    logout();
     navigate('/');
+    logout();
   };
 
   return (
