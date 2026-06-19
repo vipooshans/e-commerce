@@ -24,7 +24,22 @@ const allowedOrigins = [
   'http://localhost:5173',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
-app.use(cors({ origin: allowedOrigins, credentials: true }));
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    
+    const isAllowed = allowedOrigins.includes(origin) || 
+      (origin.endsWith('.vercel.app') && origin.includes('vipooshan'));
+      
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(null, false); // Using false instead of Error avoids printing scary stack traces in logs
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== 'production') app.use(morgan('dev'));
