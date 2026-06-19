@@ -35,11 +35,11 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'Lumora API running' }));
+app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'EverBuyGlobal API running' }));
 
 // Error middleware
 app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Lumora server running on port ${PORT} in ${process.env.NODE_ENV} mode`));
+app.listen(PORT, () => console.log(`🚀 EverBuyGlobal server running on port ${PORT} in ${process.env.NODE_ENV} mode`));

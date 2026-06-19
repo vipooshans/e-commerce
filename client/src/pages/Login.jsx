@@ -32,7 +32,9 @@ const Login = () => {
     <div className={`${styles.page} page-enter`}>
       <div className={styles.bgGlow} />
       <div className={styles.card}>
-        <div className={styles.logo}>◈ <span className="gradient-text">Lumora</span></div>
+        <div className={styles.logo}>
+          <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '48px', objectFit: 'contain', marginBottom: '10px' }} />
+        </div>
         <h2>Welcome Back</h2>
         <p>Sign in to your account to continue</p>
 
@@ -74,7 +76,7 @@ const Login = () => {
         </form>
 
         <p className={styles.switchLink}>
-          New to Lumora? <Link to="/register">Create an account</Link>
+          New to EverBuyGlobal? <Link to="/register">Create an account</Link>
         </p>
       </div>
     </div>

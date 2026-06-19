@@ -1,4 +1,4 @@
-# ◈ Lumora — Full-Stack MERN E-Commerce Store
+# ◈ EverBuyGlobal — Full-Stack MERN E-Commerce Store
 
 > A vibrant, modern e-commerce application built with MongoDB, Express.js, React 18 (Vite), and Node.js.
 
