@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { IMAGE_BASE_URL } from '../services/api';
 import styles from './Cart.module.css';
 
 const Cart = () => {
@@ -26,7 +27,7 @@ const Cart = () => {
           <div className={styles.items}>
             {cartItems.map((item) => {
               const imgSrc = item.images?.[0]
-                ? item.images[0].startsWith('http') ? item.images[0] : `http://localhost:5000${item.images[0]}`
+                ? item.images[0].startsWith('http') ? item.images[0] : `${IMAGE_BASE_URL}${item.images[0]}`
                 : null;
               return (
                 <div key={item._id} className={`glass-card ${styles.item}`}>

@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import { IMAGE_BASE_URL } from '../services/api';
 import StarRating from './StarRating';
 import Confetti from './Confetti';
 import styles from './ProductCard.module.css';
@@ -24,7 +25,7 @@ const ProductCard = ({ product }) => {
   const imageSrc = product.images?.[0]
     ? product.images[0].startsWith('http')
       ? product.images[0]
-      : `http://localhost:5000${product.images[0]}`
+      : `${IMAGE_BASE_URL}${product.images[0]}`
     : null;
 
   const handleAddToCart = (e) => {
