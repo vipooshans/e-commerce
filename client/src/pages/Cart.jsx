@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import styles from './Cart.module.css';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, updateQty, itemsPrice, taxPrice, shippingPrice, totalPrice } = useCart();
+  const { cartItems, removeFromCart, updateQty, itemsPrice, shippingPrice, totalPrice } = useCart();
 
   if (cartItems.length === 0) {
     return (
@@ -58,10 +58,6 @@ const Cart = () => {
             <div className={styles.summaryLine}>
               <span>Subtotal</span>
               <span>Rs {itemsPrice.toLocaleString('en-LK')}</span>
-            </div>
-            <div className={styles.summaryLine}>
-              <span>VAT (18%)</span>
-              <span>Rs {taxPrice.toLocaleString('en-LK')}</span>
             </div>
             <div className={styles.summaryLine}>
               <span>Shipping</span>

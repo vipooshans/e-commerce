@@ -1,37 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
-import { createOrder, payOrder, confirmStripePayment } from '../services/orderService';
+import { createOrder, payOrder } from '../services/orderService';
 import styles from './Checkout.module.css';
 
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_placeholder');
-
-const CARD_ELEMENT_OPTIONS = {
-  style: {
-    base: {
-      color: '#F1EEF9',
-      fontFamily: '"Outfit", sans-serif',
-      fontSize: '16px',
-      '::placeholder': { color: '#7A6A9B' },
-    },
-    invalid: { color: '#EF4444' },
-  },
-};
-
 const CheckoutForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
   const navigate = useNavigate();
-  const { cartItems, itemsPrice, taxPrice, shippingPrice, totalPrice, clearCart } = useCart();
+  const { cartItems, itemsPrice, shippingPrice, totalPrice, clearCart } = useCart();
   const { user } = useAuth();
   const { addToast } = useToast();
 
-  const [step, setStep] = useState(1); // 1: shipping, 2: payment
-  const [payMethod, setPayMethod] = useState('stripe');
+  const [step, setStep] = useState(1); // 1: shipping, 2: confirm
   const [loading, setLoading] = useState(false);
 
   const [shipping, setShipping] = useState({
@@ -62,35 +43,30 @@ const CheckoutForm = () => {
       const order = await createOrder({
         orderItems,
         shippingAddress: shipping,
-        paymentMethod: payMethod,
+        paymentMethod: 'whatsapp',
         itemsPrice,
-        taxPrice,
+        taxPrice: 0,
         shippingPrice,
         totalPrice,
       });
 
-      if (payMethod === 'cod') {
-        await payOrder(order._id, 'cod');
-        clearCart();
-        navigate(`/order-success/${order._id}`);
-      } else {
-        // Stripe
-        const { clientSecret } = await payOrder(order._id, 'stripe');
-        const cardElement = elements.getElement(CardElement);
-        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-          payment_method: { card: cardElement, billing_details: { name: user.name, email: user.email } },
-        });
-        if (error) {
-          addToast(error.message, 'error');
-          setLoading(false);
-          return;
-        }
-        if (paymentIntent.status === 'succeeded') {
-          await confirmStripePayment(order._id, paymentIntent.id);
-          clearCart();
-          navigate(`/order-success/${order._id}`);
-        }
-      }
+      await payOrder(order._id, 'whatsapp');
+      
+      // Generate WhatsApp message
+      const message = `🛒 *New Order from Lumora*\n\n` +
+        `👤 *Customer Details:*\n` +
+        `- Name: ${user.name}\n` +
+        `- Phone: ${shipping.phone || 'N/A'}\n` +
+        `- Address: ${shipping.address}, ${shipping.city}, ${shipping.postalCode}, ${shipping.country}\n\n` +
+        `📦 *Product Details:*\n` +
+        orderItems.map(item => `- ${item.name} × ${item.qty} (Rs. ${(item.price * item.qty).toLocaleString('en-LK')})`).join('\n') + `\n\n` +
+        `💵 *Total Amount:* Rs. ${totalPrice.toLocaleString('en-LK')}`;
+
+      const whatsappUrl = `https://wa.me/94772078909?text=${encodeURIComponent(message)}`;
+      
+      clearCart();
+      window.open(whatsappUrl, '_blank');
+      navigate(`/order-success/${order._id}`);
     } catch (err) {
       addToast(err, 'error');
       setLoading(false);
@@ -103,7 +79,7 @@ const CheckoutForm = () => {
       <div className={styles.left}>
         {/* Step indicator */}
         <div className={styles.steps}>
-          {['Shipping', 'Payment'].map((s, i) => (
+          {['Shipping', 'Confirm Order'].map((s, i) => (
             <div key={s} className={`${styles.step} ${step > i ? styles.stepDone : ''} ${step === i + 1 ? styles.stepActive : ''}`}>
               <span className={styles.stepNum}>{step > i + 1 ? '✓' : i + 1}</span>
               <span>{s}</span>
@@ -138,52 +114,30 @@ const CheckoutForm = () => {
               ))}
             </div>
             <button className="btn btn-primary btn-lg" onClick={() => setStep(2)} style={{ width: '100%' }} id="next-to-payment-btn">
-              Continue to Payment →
+              Continue to Confirmation →
             </button>
           </div>
         )}
 
         {step === 2 && (
           <div className={`glass-card ${styles.card}`}>
-            <h2>Payment Method</h2>
-
-            <div className={styles.paymentOptions}>
-              <label className={`${styles.payOption} ${payMethod === 'stripe' ? styles.payActive : ''}`} id="pay-stripe">
-                <input type="radio" name="payment" value="stripe" checked={payMethod === 'stripe'} onChange={() => setPayMethod('stripe')} />
-                <span className={styles.payIcon}>💳</span>
-                <div>
-                  <strong>Credit / Debit Card</strong>
-                  <small>Secured by Stripe</small>
-                </div>
-              </label>
-              <label className={`${styles.payOption} ${payMethod === 'cod' ? styles.payActive : ''}`} id="pay-cod">
-                <input type="radio" name="payment" value="cod" checked={payMethod === 'cod'} onChange={() => setPayMethod('cod')} />
-                <span className={styles.payIcon}>💵</span>
-                <div>
-                  <strong>Cash on Delivery</strong>
-                  <small>Pay when you receive</small>
-                </div>
-              </label>
+            <h2>Confirm Your Order</h2>
+            
+            <div style={{ margin: '20px 0', padding: '15px', borderRadius: '8px', backgroundColor: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem', margin: '0 0 10px 0' }}>
+                <span style={{ fontSize: '1.4rem' }}>💬</span> <strong>WhatsApp Order Confirmation</strong>
+              </p>
+              <p style={{ fontSize: '0.9rem', color: '#A098B8', margin: 0, lineHeight: '1.4' }}>
+                Your order details will be processed, and you will be redirected to WhatsApp to send us the order and customer information.
+              </p>
             </div>
-
-            {payMethod === 'stripe' && (
-              <div className={styles.stripeWrap}>
-                <label className="form-label">Card Details</label>
-                <div className={styles.cardElement}>
-                  <CardElement options={CARD_ELEMENT_OPTIONS} />
-                </div>
-                <p className={styles.testCardHint}>
-                  🧪 Test card: <strong>4242 4242 4242 4242</strong> · Any future date · Any 3-digit CVC
-                </p>
-              </div>
-            )}
 
             <div className={styles.stepBtns}>
               <button className="btn btn-outline" onClick={() => setStep(1)} id="back-to-shipping-btn">← Back</button>
               <button
                 className="btn btn-coral btn-lg"
                 onClick={handlePlaceOrder}
-                disabled={loading || !stripe}
+                disabled={loading}
                 id="place-order-btn"
               >
                 {loading ? 'Processing...' : `Place Order · Rs ${totalPrice.toLocaleString('en-LK')}`}
@@ -205,7 +159,7 @@ const CheckoutForm = () => {
           ))}
         </div>
         <div className={styles.divider} />
-        {[['Subtotal', `Rs ${itemsPrice.toLocaleString('en-LK')}`], ['VAT (18%)', `Rs ${taxPrice.toLocaleString('en-LK')}`], ['Shipping', shippingPrice === 0 ? 'FREE' : `Rs ${shippingPrice}`]].map(([k, v]) => (
+        {[['Subtotal', `Rs ${itemsPrice.toLocaleString('en-LK')}`], ['Shipping', shippingPrice === 0 ? 'FREE' : `Rs ${shippingPrice}`]].map(([k, v]) => (
           <div key={k} className={styles.summaryLine}>
             <span>{k}</span>
             <span style={{ color: k === 'Shipping' && shippingPrice === 0 ? '#22C55E' : undefined }}>{v}</span>
@@ -236,9 +190,7 @@ const Checkout = () => {
         <h1 style={{ marginBottom: 32 }}>
           Checkout <span className="gradient-text">Securely</span>
         </h1>
-        <Elements stripe={stripePromise}>
-          <CheckoutForm />
-        </Elements>
+        <CheckoutForm />
       </div>
     </div>
   );
