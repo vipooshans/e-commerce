@@ -8,6 +8,7 @@ import { useToast } from '../context/ToastContext';
 import StarRating from '../components/StarRating';
 import Confetti from '../components/Confetti';
 import Loader from '../components/Loader';
+import { IMAGE_BASE_URL } from '../services/api';
 import styles from './ProductDetail.module.css';
 
 const ProductDetail = () => {
@@ -42,7 +43,7 @@ const ProductDetail = () => {
   if (!product) return null;
 
   const images = product.images?.length > 0
-    ? product.images.map((img) => img.startsWith('http') ? img : `http://localhost:5000${img}`)
+    ? product.images.map((img) => img.startsWith('http') ? img : `${IMAGE_BASE_URL}${img}`)
     : null;
 
   const discount = product.originalPrice

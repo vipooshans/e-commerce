@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '../../services/productService';
 import { useToast } from '../../context/ToastContext';
 import Loader from '../../components/Loader';
+import { IMAGE_BASE_URL } from '../../services/api';
 import styles from './Admin.module.css';
 
 const CATEGORIES = ['Electronics', 'Fashion', 'Home & Kitchen', 'Beauty & Personal Care', 'Sports & Fitness', 'Books'];
@@ -86,7 +87,7 @@ const ProductManager = () => {
                 <span>Image</span><span>Name</span><span>Price</span><span>Category</span><span>Stock</span><span>Featured</span><span>Actions</span>
               </div>
               {products.map((p) => {
-                const imgSrc = p.images?.[0] ? (p.images[0].startsWith('http') ? p.images[0] : `http://localhost:5000${p.images[0]}`) : null;
+                const imgSrc = p.images?.[0] ? (p.images[0].startsWith('http') ? p.images[0] : `${IMAGE_BASE_URL}${p.images[0]}`) : null;
                 return (
                   <div key={p._id} className={styles.tableRow} style={{ gridTemplateColumns: '60px 1fr 100px 120px 80px 100px 100px' }}>
                     <span>
