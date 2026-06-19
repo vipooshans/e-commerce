@@ -1,7 +1,7 @@
 {
-  "name": "lumora-server",
+  "name": "everbuyglobal-server",
   "version": "1.0.0",
-  "description": "Lumora Backend API",
+  "description": "EverBuyGlobal Backend API",
   "type": "module",
   "main": "server.js",
   "scripts": {

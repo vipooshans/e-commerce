@@ -1,7 +1,7 @@
 {
-  "name": "lumora",
+  "name": "everbuyglobal",
   "version": "1.0.0",
-  "description": "Lumora - Full-Stack MERN E-Commerce Store",
+  "description": "EverBuyGlobal - Full-Stack MERN E-Commerce Store",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd server && npm run dev",
