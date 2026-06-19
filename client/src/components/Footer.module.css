@@ -1,0 +1,104 @@
+.footer {
+  margin-top: auto;
+  background: #0B0714;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 60px;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+
+.brand p {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #7A6A9B;
+  max-width: 280px;
+  line-height: 1.7;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+.logoGem {
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.socials {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+.socialBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.socialBtn:hover { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.linkGroup h4 {
+  color: #F1EEF9;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+.linkGroup a {
+  display: block;
+  color: #7A6A9B;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.linkGroup a:hover { color: #B8A9D9; }
+
+.bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 0;
+}
+.bottom .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom p { font-size: 0.85rem; color: #7A6A9B; }
+
+.paymentIcons { display: flex; gap: 8px; }
+.payIcon {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .inner { grid-template-columns: 1fr; }
+  .links { grid-template-columns: repeat(2, 1fr); }
+  .bottom .container { flex-direction: column; gap: 12px; }
+}
+@media (max-width: 480px) {
+  .links { grid-template-columns: 1fr; }
+}
