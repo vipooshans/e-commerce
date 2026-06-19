@@ -9,6 +9,11 @@ const getBaseUrl = () => {
 export const API_BASE_URL = getBaseUrl();
 export const IMAGE_BASE_URL = API_BASE_URL.replace(/\/api$/, '');
 
+if (import.meta.env.PROD) {
+  console.log('🔌 Connected to API:', API_BASE_URL);
+  console.log('🖼️ Loading Images from:', IMAGE_BASE_URL);
+}
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
