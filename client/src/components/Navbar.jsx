@@ -43,8 +43,7 @@ const Navbar = () => {
       <div className={`container ${styles.inner}`}>
         {/* Logo */}
         <Link to="/" className={styles.logo}>
-          <span className={styles.logoGem}>◈</span>
-          <span className="gradient-text">Lumora</span>
+          <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '42px', objectFit: 'contain' }} />
         </Link>
 
         {/* Search bar (desktop) */}

@@ -53,7 +53,7 @@ const CheckoutForm = () => {
       await payOrder(order._id, 'whatsapp');
       
       // Generate WhatsApp message
-      const message = `🛒 *New Order from Lumora*\n\n` +
+      const message = `🛒 *New Order from EverBuyGlobal*\n\n` +
         `👤 *Customer Details:*\n` +
         `- Name: ${user.name}\n` +
         `- Phone: ${shipping.phone || 'N/A'}\n` +

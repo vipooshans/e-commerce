@@ -21,7 +21,7 @@ const Register = () => {
     setLoading(true);
     try {
       const user = await register(form.name, form.email, form.password);
-      addToast(`Welcome to Lumora, ${user.name}! 🎉`, 'success');
+      addToast(`Welcome to EverBuyGlobal, ${user.name}! 🎉`, 'success');
       navigate('/');
     } catch (err) {
       addToast(err, 'error');
@@ -34,9 +34,11 @@ const Register = () => {
     <div className={`${styles.page} page-enter`}>
       <div className={styles.bgGlow} />
       <div className={styles.card}>
-        <div className={styles.logo}>◈ <span className="gradient-text">Lumora</span></div>
+        <div className={styles.logo}>
+          <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '48px', objectFit: 'contain', marginBottom: '10px' }} />
+        </div>
         <h2>Create Account</h2>
-        <p>Join Lumora and start shopping</p>
+        <p>Join EverBuyGlobal and start shopping</p>
 
         <form onSubmit={handleSubmit} className={styles.form} id="register-form">
           {[

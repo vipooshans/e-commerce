@@ -9,8 +9,7 @@ const Footer = () => {
         {/* Brand */}
         <div className={styles.brand}>
           <Link to="/" className={styles.logo}>
-            <span className={styles.logoGem}>◈</span>
-            <span className="gradient-text">Lumora</span>
+            <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '35px', objectFit: 'contain' }} />
           </Link>
           <p>Discover a curated universe of products crafted for modern living.</p>
           <div className={styles.socials}>
@@ -49,7 +48,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className={styles.bottom}>
         <div className="container">
-          <p>© {currentYear} Lumora. All rights reserved.</p>
+          <p>© {currentYear} EverBuyGlobal. All rights reserved.</p>
           <div className={styles.paymentIcons}>
             <span className={styles.payIcon}>💳</span>
             <span className={styles.payIcon}>🏦</span>
