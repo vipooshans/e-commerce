@@ -55,7 +55,7 @@ const Dashboard = () => {
 
         {/* Stats */}
         <div className={styles.statsGrid}>
-          <StatCard icon="💰" label="Total Revenue" value={`₹${stats?.totalRevenue?.toLocaleString('en-IN') || 0}`} color="#7C3AED" />
+          <StatCard icon="💰" label="Total Revenue" value={`Rs ${stats?.totalRevenue?.toLocaleString('en-LK') || 0}`} color="#7C3AED" />
           <StatCard icon="📦" label="Total Orders" value={stats?.totalOrders || 0} color="#EC4899" />
           <StatCard icon="🛍️" label="Products" value={products.length} color="#3B82F6" />
           <StatCard icon="⭐" label="Recent Orders" value={stats?.recentOrders?.length || 0} color="#F97316" />
@@ -125,7 +125,7 @@ const Dashboard = () => {
               <Link key={order._id} to={`/order/${order._id}`} className={styles.tableRow} id={`admin-order-${order._id}`}>
                 <span>#{order._id.slice(-6).toUpperCase()}</span>
                 <span>{order.user?.name}</span>
-                <span>₹{order.totalPrice.toLocaleString('en-IN')}</span>
+                <span>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
                 <span>
                   <span className="badge" style={{ background: `${STATUS_COLORS[order.orderStatus]}20`, color: STATUS_COLORS[order.orderStatus], border: `1px solid ${STATUS_COLORS[order.orderStatus]}40` }}>
                     {order.orderStatus}

@@ -104,7 +104,7 @@ const Profile = () => {
                     <div className={styles.orderInfo}>
                       <span>{new Date(order.createdAt).toLocaleDateString()}</span>
                       <span>{order.orderItems.length} item{order.orderItems.length !== 1 ? 's' : ''}</span>
-                      <span className="gradient-text" style={{ fontWeight: 700 }}>₹{order.totalPrice.toLocaleString('en-IN')}</span>
+                      <span className="gradient-text" style={{ fontWeight: 700 }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
                     </div>
                     <Link to={`/order/${order._id}`} className="btn btn-outline btn-sm" id={`view-order-${order._id}`}>Track →</Link>
                   </div>

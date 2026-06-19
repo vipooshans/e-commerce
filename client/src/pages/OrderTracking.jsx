@@ -87,13 +87,13 @@ const OrderTracking = () => {
               <div key={i} className={styles.orderItem}>
                 <span className={styles.itemName}>{item.name}</span>
                 <span className={styles.itemQty}>× {item.qty}</span>
-                <span className={styles.itemPrice}>₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
+                <span className={styles.itemPrice}>Rs {(item.price * item.qty).toLocaleString('en-LK')}</span>
               </div>
             ))}
             <div className={styles.divider} />
             <div className={styles.orderTotal}>
               <span>Total</span>
-              <span className="gradient-text" style={{ fontWeight: 700 }}>₹{order.totalPrice.toLocaleString('en-IN')}</span>
+              <span className="gradient-text" style={{ fontWeight: 700 }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
             </div>
           </div>
 

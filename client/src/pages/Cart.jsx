@@ -36,7 +36,7 @@ const Cart = () => {
                   <div className={styles.itemInfo}>
                     <Link to={`/products/${item._id}`} className={styles.itemName}>{item.name}</Link>
                     <span className={styles.itemCategory}>{item.category}</span>
-                    <span className={styles.itemPrice}>₹{item.price.toLocaleString('en-IN')}</span>
+                    <span className={styles.itemPrice}>Rs {item.price.toLocaleString('en-LK')}</span>
                   </div>
                   <div className={styles.itemControls}>
                     <div className={styles.qtyControl}>
@@ -44,7 +44,7 @@ const Cart = () => {
                       <span className={styles.qty}>{item.qty}</span>
                       <button onClick={() => updateQty(item._id, item.qty + 1)} className={styles.qtyBtn} id={`qty-inc-${item._id}`}>+</button>
                     </div>
-                    <span className={styles.lineTotal}>₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
+                    <span className={styles.lineTotal}>Rs {(item.price * item.qty).toLocaleString('en-LK')}</span>
                     <button onClick={() => removeFromCart(item._id)} className={styles.removeBtn} aria-label="Remove" id={`remove-${item._id}`}>✕</button>
                   </div>
                 </div>
@@ -57,23 +57,23 @@ const Cart = () => {
             <h3>Order Summary</h3>
             <div className={styles.summaryLine}>
               <span>Subtotal</span>
-              <span>₹{itemsPrice.toLocaleString('en-IN')}</span>
+              <span>Rs {itemsPrice.toLocaleString('en-LK')}</span>
             </div>
             <div className={styles.summaryLine}>
-              <span>GST (18%)</span>
-              <span>₹{taxPrice.toLocaleString('en-IN')}</span>
+              <span>VAT (18%)</span>
+              <span>Rs {taxPrice.toLocaleString('en-LK')}</span>
             </div>
             <div className={styles.summaryLine}>
               <span>Shipping</span>
-              <span>{shippingPrice === 0 ? <span style={{ color: '#22C55E' }}>FREE</span> : `₹${shippingPrice}`}</span>
+              <span>{shippingPrice === 0 ? <span style={{ color: '#22C55E' }}>FREE</span> : `Rs ${shippingPrice}`}</span>
             </div>
             <div className={styles.divider} />
             <div className={`${styles.summaryLine} ${styles.total}`}>
               <span>Total</span>
-              <span className="gradient-text">₹{totalPrice.toLocaleString('en-IN')}</span>
+              <span className="gradient-text">Rs {totalPrice.toLocaleString('en-LK')}</span>
             </div>
             {shippingPrice > 0 && (
-              <p className={styles.shippingNote}>Add ₹{(999 - itemsPrice).toFixed(0)} more for FREE shipping</p>
+              <p className={styles.shippingNote}>Add Rs {(999 - itemsPrice).toFixed(0)} more for FREE shipping</p>
             )}
             <Link to="/checkout" className="btn btn-coral btn-lg" id="checkout-btn" style={{ width: '100%', marginTop: 16 }}>
               Proceed to Checkout →

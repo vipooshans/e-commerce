@@ -45,7 +45,7 @@ const OrderSuccess = () => {
               </div>
               <div className={styles.detailRow}>
                 <span>Total Amount</span>
-                <span className="gradient-text" style={{ fontWeight: 700 }}>₹{order.totalPrice.toLocaleString('en-IN')}</span>
+                <span className="gradient-text" style={{ fontWeight: 700 }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
               </div>
               <div className={styles.detailRow}>
                 <span>Items</span>

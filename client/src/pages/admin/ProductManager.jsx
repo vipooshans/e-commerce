@@ -93,7 +93,7 @@ const ProductManager = () => {
                       {imgSrc ? <img src={imgSrc} alt={p.name} style={{ width: 44, height: 44, borderRadius: 8, objectFit: 'cover' }} /> : <span style={{ fontSize: '1.5rem' }}>🛍️</span>}
                     </span>
                     <span style={{ fontWeight: 600, color: '#F1EEF9', fontSize: '0.875rem' }}>{p.name}</span>
-                    <span>₹{p.price.toLocaleString('en-IN')}</span>
+                    <span>Rs {p.price.toLocaleString('en-LK')}</span>
                     <span>{p.category}</span>
                     <span style={{ color: p.stock === 0 ? '#EF4444' : '#22C55E' }}>{p.stock}</span>
                     <span>{p.isFeatured ? '✓' : '—'}</span>
@@ -127,11 +127,11 @@ const ProductManager = () => {
                     <textarea value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} className="form-input" rows={3} required id="product-desc" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Price (₹)</label>
+                    <label className="form-label">Price (Rs)</label>
                     <input type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} className="form-input" required id="product-price" />
                   </div>
                   <div className="form-group">
-                    <label className="form-label">Original Price (₹)</label>
+                    <label className="form-label">Original Price (Rs)</label>
                     <input type="number" value={form.originalPrice} onChange={(e) => setForm({ ...form, originalPrice: e.target.value })} className="form-input" id="product-orig-price" />
                   </div>
                   <div className="form-group">

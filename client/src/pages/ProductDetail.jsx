@@ -136,11 +136,11 @@ const ProductDetail = () => {
             </div>
 
             <div className={styles.priceBlock}>
-              <span className={styles.price}>₹{product.price.toLocaleString('en-IN')}</span>
+              <span className={styles.price}>Rs {product.price.toLocaleString('en-LK')}</span>
               {product.originalPrice && (
-                <span className={styles.originalPrice}>₹{product.originalPrice.toLocaleString('en-IN')}</span>
+                <span className={styles.originalPrice}>Rs {product.originalPrice.toLocaleString('en-LK')}</span>
               )}
-              {discount > 0 && <span className={styles.saving}>You save ₹{(product.originalPrice - product.price).toLocaleString('en-IN')}</span>}
+              {discount > 0 && <span className={styles.saving}>You save Rs {(product.originalPrice - product.price).toLocaleString('en-LK')}</span>}
             </div>
 
             <div className={styles.stockRow}>

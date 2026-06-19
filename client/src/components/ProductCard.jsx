@@ -97,9 +97,9 @@ const ProductCard = ({ product }) => {
             <span className={styles.numReviews}>({product.numReviews})</span>
           </div>
           <div className={styles.priceRow}>
-            <span className={styles.price}>₹{product.price.toLocaleString('en-IN')}</span>
+            <span className={styles.price}>Rs {product.price.toLocaleString('en-LK')}</span>
             {product.originalPrice && (
-              <span className={styles.originalPrice}>₹{product.originalPrice.toLocaleString('en-IN')}</span>
+              <span className={styles.originalPrice}>Rs {product.originalPrice.toLocaleString('en-LK')}</span>
             )}
           </div>
         </div>

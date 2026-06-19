@@ -67,7 +67,7 @@ const OrderManager = () => {
                     #{order._id.slice(-6).toUpperCase()}
                   </Link>
                   <span>{order.user?.name || '—'}<br /><small style={{ color: '#7A6A9B' }}>{order.user?.email}</small></span>
-                  <span style={{ fontWeight: 600, color: '#F1EEF9' }}>₹{order.totalPrice.toLocaleString('en-IN')}</span>
+                  <span style={{ fontWeight: 600, color: '#F1EEF9' }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
                   <span>
                     <span className={`badge ${order.isPaid ? 'badge-green' : 'badge-coral'}`}>{order.isPaid ? 'Paid' : 'Unpaid'}</span>
                   </span>

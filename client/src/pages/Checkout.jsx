@@ -38,7 +38,7 @@ const CheckoutForm = () => {
     address: user?.addresses?.[0]?.street || '',
     city: user?.addresses?.[0]?.city || '',
     postalCode: user?.addresses?.[0]?.zip || '',
-    country: user?.addresses?.[0]?.country || 'India',
+    country: user?.addresses?.[0]?.country || 'Sri Lanka',
     phone: '',
   });
 
@@ -117,11 +117,11 @@ const CheckoutForm = () => {
             <h2>Shipping Address</h2>
             <div className={styles.formGrid}>
               {[
-                { name: 'address', label: 'Street Address', placeholder: '123 Main Street', type: 'text' },
-                { name: 'city', label: 'City', placeholder: 'Mumbai', type: 'text' },
-                { name: 'postalCode', label: 'Postal Code', placeholder: '400001', type: 'text' },
-                { name: 'country', label: 'Country', placeholder: 'India', type: 'text' },
-                { name: 'phone', label: 'Phone Number', placeholder: '+91 9876543210', type: 'tel' },
+                { name: 'address', label: 'Street Address', placeholder: '123 Galle Road', type: 'text' },
+                { name: 'city', label: 'City', placeholder: 'Colombo', type: 'text' },
+                { name: 'postalCode', label: 'Postal Code', placeholder: '00100', type: 'text' },
+                { name: 'country', label: 'Country', placeholder: 'Sri Lanka', type: 'text' },
+                { name: 'phone', label: 'Phone Number', placeholder: '+94 77 123 4567', type: 'tel' },
               ].map((field) => (
                 <div key={field.name} className="form-group">
                   <label className="form-label">{field.label}</label>
@@ -186,7 +186,7 @@ const CheckoutForm = () => {
                 disabled={loading || !stripe}
                 id="place-order-btn"
               >
-                {loading ? 'Processing...' : `Place Order · ₹${totalPrice.toLocaleString('en-IN')}`}
+                {loading ? 'Processing...' : `Place Order · Rs ${totalPrice.toLocaleString('en-LK')}`}
               </button>
             </div>
           </div>
@@ -200,12 +200,12 @@ const CheckoutForm = () => {
           {cartItems.map((item) => (
             <div key={item._id} className={styles.summaryItem}>
               <span className={styles.summaryItemName}>{item.name} × {item.qty}</span>
-              <span>₹{(item.price * item.qty).toLocaleString('en-IN')}</span>
+              <span>Rs {(item.price * item.qty).toLocaleString('en-LK')}</span>
             </div>
           ))}
         </div>
         <div className={styles.divider} />
-        {[['Subtotal', `₹${itemsPrice.toLocaleString('en-IN')}`], ['GST (18%)', `₹${taxPrice.toLocaleString('en-IN')}`], ['Shipping', shippingPrice === 0 ? 'FREE' : `₹${shippingPrice}`]].map(([k, v]) => (
+        {[['Subtotal', `Rs ${itemsPrice.toLocaleString('en-LK')}`], ['VAT (18%)', `Rs ${taxPrice.toLocaleString('en-LK')}`], ['Shipping', shippingPrice === 0 ? 'FREE' : `Rs ${shippingPrice}`]].map(([k, v]) => (
           <div key={k} className={styles.summaryLine}>
             <span>{k}</span>
             <span style={{ color: k === 'Shipping' && shippingPrice === 0 ? '#22C55E' : undefined }}>{v}</span>
@@ -214,7 +214,7 @@ const CheckoutForm = () => {
         <div className={styles.divider} />
         <div className={`${styles.summaryLine} ${styles.total}`}>
           <span>Total</span>
-          <span className="gradient-text">₹{totalPrice.toLocaleString('en-IN')}</span>
+          <span className="gradient-text">Rs {totalPrice.toLocaleString('en-LK')}</span>
         </div>
       </div>
     </div>

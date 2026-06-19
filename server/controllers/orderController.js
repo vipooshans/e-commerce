@@ -99,7 +99,7 @@ export const payOrder = asyncHandler(async (req, res) => {
     // Create Stripe PaymentIntent
     const paymentIntent = await stripe.paymentIntents.create({
       amount: Math.round(order.totalPrice * 100), // paise/cents
-      currency: 'inr',
+      currency: 'lkr',
       metadata: { orderId: order._id.toString() },
     });
     res.json({ clientSecret: paymentIntent.client_secret });

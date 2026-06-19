@@ -106,7 +106,7 @@ const Products = () => {
         <div className={styles.priceInputs}>
           <input
             type="number"
-            placeholder="Min ₹"
+            placeholder="Min Rs"
             value={priceMin}
             onChange={(e) => setPriceMin(e.target.value)}
             className="form-input"
@@ -115,7 +115,7 @@ const Products = () => {
           <span>—</span>
           <input
             type="number"
-            placeholder="Max ₹"
+            placeholder="Max Rs"
             value={priceMax}
             onChange={(e) => setPriceMax(e.target.value)}
             className="form-input"
