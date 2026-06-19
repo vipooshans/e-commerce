@@ -1,0 +1,103 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding: 28px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+}
+
+.avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+}
+
+.header h1 { font-size: 1.5rem; }
+.header p { color: #7A6A9B; font-size: 0.9rem; margin-top: 2px; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 32px;
+}
+
+.tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #7A6A9B;
+  font-size: 0.95rem;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: -1px;
+}
+.tab:hover { color: #B8A9D9; }
+.activeTab { color: #9D63F7; border-bottom-color: #7C3AED; font-weight: 600; }
+
+/* Empty state */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 60px 0;
+  text-align: center;
+}
+.empty span { font-size: 3rem; }
+
+/* Orders */
+.ordersList { display: flex; flex-direction: column; gap: 12px; }
+
+.orderRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  flex-wrap: wrap;
+}
+
+.orderMeta { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; }
+.orderId { font-weight: 700; font-size: 0.9rem; color: #F1EEF9; letter-spacing: 0.04em; }
+
+.orderInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 2;
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  color: #B8A9D9;
+}
+
+/* Addresses */
+.addressGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.addressCard { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+.addressCard p { font-size: 0.875rem; color: #B8A9D9; }
+
+/* Settings */
+.settingsCard { padding: 28px; max-width: 540px; }
+.settingsCard h3 { margin-bottom: 20px; }
+.settingsForm { display: flex; flex-direction: column; gap: 18px; }
+
+@media (max-width: 768px) {
+  .tabs { overflow-x: auto; }
+  .tab { white-space: nowrap; }
+  .orderRow { flex-direction: column; align-items: flex-start; }
+  .orderInfo { gap: 12px; }
+}

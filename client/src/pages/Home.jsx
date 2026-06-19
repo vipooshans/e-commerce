@@ -51,7 +51,7 @@ const Home = () => {
               </Link>
             </div>
             <div className={styles.heroStats}>
-              {[['30+', 'Products'], ['6', 'Categories'], ['FREE', 'Shipping over ₹999']].map(([val, label]) => (
+              {[['30+', 'Products'], ['6', 'Categories'], ['FREE', 'Shipping over Rs 999']].map(([val, label]) => (
                 <div key={label} className={styles.stat}>
                   <span className={styles.statVal}>{val}</span>
                   <span className={styles.statLabel}>{label}</span>
@@ -121,7 +121,7 @@ const Home = () => {
         <div className="container">
           <div className={styles.banner}>
             <div className={styles.bannerContent}>
-              <h2>Free Shipping on Orders Over <span className="gradient-text">₹999</span></h2>
+              <h2>Free Shipping on Orders Over <span className="gradient-text">Rs 999</span></h2>
               <p>Plus 30-day hassle-free returns on all products</p>
               <Link to="/products" className="btn btn-coral btn-lg" id="banner-shop-btn">
                 Start Shopping
