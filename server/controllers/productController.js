@@ -1,6 +1,73 @@
 import Product from '../models/Product.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
+const MAX_IMAGES = 5;
+
+/** Parse and validate http(s) image URLs. Rejects javascript:, data:, etc. */
+const parseAndValidateImages = (raw) => {
+  if (raw === undefined || raw === null) return null;
+
+  let list = [];
+  if (Array.isArray(raw)) {
+    list = raw;
+  } else if (typeof raw === 'string') {
+    list = raw.split(/[\n,]+/);
+  } else {
+    const err = new Error('Images must be an array or comma-separated string of URLs');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  const seen = new Set();
+  const images = [];
+
+  for (const item of list) {
+    const trimmed = String(item).trim();
+    if (!trimmed) continue;
+
+    // Allow legacy local upload paths still stored in the DB
+    if (trimmed.startsWith('/uploads/')) {
+      if (seen.has(trimmed)) continue;
+      seen.add(trimmed);
+      images.push(trimmed);
+      if (images.length > MAX_IMAGES) {
+        const err = new Error(`Maximum ${MAX_IMAGES} images allowed`);
+        err.statusCode = 400;
+        throw err;
+      }
+      continue;
+    }
+
+    let url;
+    try {
+      url = new URL(trimmed);
+    } catch {
+      const err = new Error(`Invalid image URL: ${trimmed}`);
+      err.statusCode = 400;
+      throw err;
+    }
+
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      const err = new Error(`Only http(s) image URLs are allowed: ${trimmed}`);
+      err.statusCode = 400;
+      throw err;
+    }
+
+    const normalized = url.href;
+    if (seen.has(normalized)) continue;
+    seen.add(normalized);
+    images.push(normalized);
+
+    if (images.length > MAX_IMAGES) {
+      const err = new Error(`Maximum ${MAX_IMAGES} images allowed`);
+      err.statusCode = 400;
+      throw err;
+    }
+  }
+
+  return images;
+};
+
 // @desc    Get all products (with filter, search, pagination)
 // @route   GET /api/products
 // @access  Public
@@ -67,8 +134,8 @@ export const getProductById = asyncHandler(async (req, res) => {
 // @route   POST /api/products
 // @access  Admin
 export const createProduct = asyncHandler(async (req, res) => {
-  const { name, description, price, originalPrice, category, brand, stock, isFeatured, tags } = req.body;
-  const images = req.files ? req.files.map((f) => `/uploads/${f.filename}`) : [];
+  const { name, description, price, originalPrice, category, brand, stock, isFeatured, tags, images: rawImages } = req.body;
+  const images = parseAndValidateImages(rawImages) || [];
   const product = await Product.create({
     name,
     description,
@@ -77,8 +144,8 @@ export const createProduct = asyncHandler(async (req, res) => {
     category,
     brand,
     stock: Number(stock) || 0,
-    isFeatured: isFeatured === 'true',
-    tags: tags ? tags.split(',').map((t) => t.trim()) : [],
+    isFeatured: isFeatured === true || isFeatured === 'true',
+    tags: Array.isArray(tags) ? tags : (tags ? String(tags).split(',').map((t) => t.trim()).filter(Boolean) : []),
     images,
   });
   res.status(201).json(product);
@@ -93,7 +160,7 @@ export const updateProduct = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Product not found');
   }
-  const { name, description, price, originalPrice, category, brand, stock, isFeatured, tags } = req.body;
+  const { name, description, price, originalPrice, category, brand, stock, isFeatured, tags, images: rawImages } = req.body;
   if (name !== undefined) product.name = name;
   if (description !== undefined) product.description = description;
   if (price !== undefined) product.price = Number(price);
@@ -101,10 +168,12 @@ export const updateProduct = asyncHandler(async (req, res) => {
   if (category !== undefined) product.category = category;
   if (brand !== undefined) product.brand = brand;
   if (stock !== undefined) product.stock = Number(stock);
-  if (isFeatured !== undefined) product.isFeatured = isFeatured === 'true' || isFeatured === true;
-  if (tags !== undefined) product.tags = typeof tags === 'string' ? tags.split(',').map((t) => t.trim()) : tags;
-  if (req.files && req.files.length > 0) {
-    product.images = req.files.map((f) => `/uploads/${f.filename}`);
+  if (isFeatured !== undefined) product.isFeatured = isFeatured === true || isFeatured === 'true';
+  if (tags !== undefined) {
+    product.tags = Array.isArray(tags) ? tags : String(tags).split(',').map((t) => t.trim()).filter(Boolean);
+  }
+  if (rawImages !== undefined) {
+    product.images = parseAndValidateImages(rawImages) || [];
   }
   const updated = await product.save();
   res.json(updated);

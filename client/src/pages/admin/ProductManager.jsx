@@ -7,7 +7,26 @@ import styles from './Admin.module.css';
 
 const CATEGORIES = ['Electronics', 'Fashion', 'Home & Kitchen', 'Beauty & Personal Care', 'Sports & Fitness', 'Books'];
 
-const EMPTY_FORM = { name: '', description: '', price: '', originalPrice: '', category: 'Electronics', brand: '', stock: '', isFeatured: false, tags: '' };
+const EMPTY_FORM = {
+  name: '',
+  description: '',
+  price: '',
+  originalPrice: '',
+  category: 'Electronics',
+  brand: '',
+  stock: '',
+  isFeatured: false,
+  tags: '',
+  imageUrls: '',
+};
+
+const parseImageUrls = (value) =>
+  value
+    .split(/[\n,]+/)
+    .map((u) => u.trim())
+    .filter(Boolean);
+
+const resolveImgSrc = (img) => (img.startsWith('http') ? img : `${IMAGE_BASE_URL}${img}`);
 
 const ProductManager = () => {
   const { addToast } = useToast();
@@ -16,7 +35,6 @@ const ProductManager = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editProduct, setEditProduct] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
-  const [images, setImages] = useState([]);
   const [saving, setSaving] = useState(false);
 
   const fetchProducts = () => {
@@ -29,13 +47,25 @@ const ProductManager = () => {
 
   useEffect(() => { fetchProducts(); }, []);
 
-  const openCreate = () => { setForm(EMPTY_FORM); setImages([]); setEditProduct(null); setModalOpen(true); };
+  const openCreate = () => {
+    setForm(EMPTY_FORM);
+    setEditProduct(null);
+    setModalOpen(true);
+  };
+
   const openEdit = (p) => {
     setForm({
-      name: p.name, description: p.description, price: p.price, originalPrice: p.originalPrice || '',
-      category: p.category, brand: p.brand, stock: p.stock, isFeatured: p.isFeatured, tags: p.tags?.join(', ') || '',
+      name: p.name,
+      description: p.description,
+      price: p.price,
+      originalPrice: p.originalPrice || '',
+      category: p.category,
+      brand: p.brand,
+      stock: p.stock,
+      isFeatured: p.isFeatured,
+      tags: p.tags?.join(', ') || '',
+      imageUrls: (p.images || []).join(', '),
     });
-    setImages([]);
     setEditProduct(p);
     setModalOpen(true);
   };
@@ -44,14 +74,16 @@ const ProductManager = () => {
     e.preventDefault();
     setSaving(true);
     try {
-      const fd = new FormData();
-      Object.entries(form).forEach(([k, v]) => fd.append(k, v));
-      images.forEach((img) => fd.append('images', img));
+      const { imageUrls, ...rest } = form;
+      const payload = {
+        ...rest,
+        images: parseImageUrls(imageUrls),
+      };
       if (editProduct) {
-        await updateProduct(editProduct._id, fd);
+        await updateProduct(editProduct._id, payload);
         addToast('Product updated!', 'success');
       } else {
-        await createProduct(fd);
+        await createProduct(payload);
         addToast('Product created!', 'success');
       }
       setModalOpen(false);
@@ -72,6 +104,11 @@ const ProductManager = () => {
     } catch (err) { addToast(err, 'error'); }
   };
 
+  const previewUrl = parseImageUrls(form.imageUrls)[0];
+  const previewSrc = previewUrl
+    ? (previewUrl.startsWith('http') ? previewUrl : `${IMAGE_BASE_URL}${previewUrl}`)
+    : null;
+
   return (
     <>
       <div className="page-enter">
@@ -88,7 +125,7 @@ const ProductManager = () => {
                   <span>Image</span><span>Name</span><span>Price</span><span>Category</span><span>Stock</span><span>Featured</span><span>Actions</span>
                 </div>
                 {products.map((p) => {
-                  const imgSrc = p.images?.[0] ? (p.images[0].startsWith('http') ? p.images[0] : `${IMAGE_BASE_URL}${p.images[0]}`) : null;
+                  const imgSrc = p.images?.[0] ? resolveImgSrc(p.images[0]) : null;
                   return (
                     <div key={p._id} className={styles.tableRow} style={{ gridTemplateColumns: '60px 1fr 100px 120px 80px 100px 100px' }}>
                       <span>
@@ -157,9 +194,26 @@ const ProductManager = () => {
                   <input type="text" value={form.tags} onChange={(e) => setForm({ ...form, tags: e.target.value })} className="form-input" id="product-tags" />
                 </div>
                 <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-                  <label className="form-label">Images</label>
-                  <input type="file" multiple accept="image/*" onChange={(e) => setImages(Array.from(e.target.files))} className="form-input" id="product-images" style={{ cursor: 'pointer' }} />
-                  {editProduct?.images?.length > 0 && <p style={{ fontSize: '0.8rem', color: '#7A6A9B', marginTop: 4 }}>Current: {editProduct.images.length} image(s). Upload new to replace.</p>}
+                  <label className="form-label">Image URLs</label>
+                  <textarea
+                    value={form.imageUrls}
+                    onChange={(e) => setForm({ ...form, imageUrls: e.target.value })}
+                    className="form-input"
+                    rows={2}
+                    placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
+                    id="product-images"
+                  />
+                  <p style={{ fontSize: '0.8rem', color: '#7A6A9B', marginTop: 4 }}>
+                    Paste up to 5 http(s) image URLs, separated by commas or new lines.
+                  </p>
+                  {previewSrc && (
+                    <img
+                      src={previewSrc}
+                      alt="Preview"
+                      style={{ marginTop: 10, width: 72, height: 72, borderRadius: 8, objectFit: 'cover', border: '1px solid rgba(255,255,255,0.1)' }}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    />
+                  )}
                 </div>
                 <div className="form-group">
                   <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer' }}>
