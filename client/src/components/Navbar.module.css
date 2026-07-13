@@ -128,28 +128,20 @@
   justify-content: center;
 }
 
-/* User dropdown */
-.userMenu { position: relative; }
-
-.avatarBtn {
+/* User select dropdown */
+.userSelectWrap {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 9999px;
-  padding: 6px 14px 6px 6px;
-  cursor: pointer;
-  color: #F1EEF9;
-  font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
-  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 4px 4px 4px 6px;
 }
-.avatarBtn:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.3); }
 
 .avatar {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7C3AED, #EC4899);
   display: flex;
@@ -157,45 +149,32 @@
   justify-content: center;
   font-weight: 700;
   font-size: 0.85rem;
+  color: #F1EEF9;
+  flex-shrink: 0;
 }
 
-.userName { font-weight: 500; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  background: #1A1230;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 14px;
-  min-width: 200px;
-  padding: 8px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-  animation: fadeInUp 0.2s ease;
-  z-index: 50;
-}
-
-.dropItem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 8px;
-  color: #B8A9D9;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-  width: 100%;
-  background: none;
+.userSelect {
+  appearance: auto;
+  background: transparent;
   border: none;
-  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: #F1EEF9;
   font-family: 'Outfit', sans-serif;
-  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 120px;
+  max-width: 160px;
 }
-.dropItem:hover { background: rgba(124,58,237,0.15); color: #F1EEF9; }
-
-.dropDivider { height: 1px; background: rgba(255,255,255,0.06); margin: 4px 0; }
-.logoutBtn { color: #F472B6; }
-.logoutBtn:hover { background: rgba(236,72,153,0.15); color: #F472B6; }
+.userSelect:hover,
+.userSelect:focus {
+  outline: none;
+}
+.userSelect option {
+  background: #1A1230;
+  color: #F1EEF9;
+}
 
 .authBtns { display: flex; align-items: center; gap: 8px; }
 

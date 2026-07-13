@@ -13,7 +13,6 @@ const Navbar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const Navbar = () => {
   }, []);
 
   // Close menu on route change
-  useEffect(() => { setMenuOpen(false); setDropdownOpen(false); }, [location]);
+  useEffect(() => { setMenuOpen(false); }, [location]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -81,33 +80,29 @@ const Navbar = () => {
 
           {/* User */}
           {user ? (
-            <div className={styles.userMenu} onMouseLeave={() => setDropdownOpen(false)}>
-              <button
-                className={styles.avatarBtn}
-                onMouseEnter={() => setDropdownOpen(true)}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+            <div className={styles.userSelectWrap}>
+              <span className={styles.avatar} aria-hidden="true">{user.name?.[0]?.toUpperCase()}</span>
+              <select
+                className={styles.userSelect}
                 id="user-menu-btn"
+                defaultValue=""
+                onChange={(e) => {
+                  const value = e.target.value;
+                  e.target.value = '';
+                  if (!value) return;
+                  if (value === 'logout') handleLogout();
+                  else navigate(value);
+                }}
+                aria-label="Account menu"
               >
-                <span className={styles.avatar}>{user.name?.[0]?.toUpperCase()}</span>
-                <span className={styles.userName}>{user.name?.split(' ')[0]}</span>
-                <span>▾</span>
-              </button>
-              {dropdownOpen && (
-                <div className={styles.dropdown}>
-                  <Link to="/profile" className={styles.dropItem}>👤 My Profile</Link>
-                  <Link to="/profile?tab=orders" className={styles.dropItem}>📦 My Orders</Link>
-                  {user.isAdmin && (
-                    <>
-                      <div className={styles.dropDivider} />
-                      <Link to="/admin/dashboard" className={styles.dropItem}>⚙️ Admin Dashboard</Link>
-                    </>
-                  )}
-                  <div className={styles.dropDivider} />
-                  <button onClick={handleLogout} className={`${styles.dropItem} ${styles.logoutBtn}`} id="logout-btn">
-                    🚪 Logout
-                  </button>
-                </div>
-              )}
+                <option value="" disabled>
+                  {user.name?.split(' ')[0] || 'Account'}
+                </option>
+                <option value="/profile">👤 My Profile</option>
+                <option value="/profile?tab=orders">📦 My Orders</option>
+                {user.isAdmin && <option value="/admin/dashboard">⚙️ Admin Dashboard</option>}
+                <option value="logout">🚪 Logout</option>
+              </select>
             </div>
           ) : (
             <div className={styles.authBtns}>
