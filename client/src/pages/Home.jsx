@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import { getFeaturedProducts } from '../services/productService';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
@@ -18,6 +19,7 @@ const Home = () => {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     getFeaturedProducts()
@@ -61,14 +63,42 @@ const Home = () => {
           </div>
           <div className={styles.heroVisual}>
             <div className={styles.glowOrb} />
-            <div className={styles.floatingCard} style={{ animationDelay: '0s' }}>
-              <span>💻</span> <span>Electronics</span>
+            <div className={styles.shoeRing} />
+            <motion.div
+              className={styles.shoeStage}
+              initial={reduceMotion ? false : { opacity: 0, scale: 0.72, rotate: -18 }}
+              animate={{ opacity: 1, scale: 1, rotate: -8 }}
+              transition={{ duration: 0.8, type: 'spring', bounce: 0.3 }}
+            >
+              <motion.img
+                src="/hero-shoe.jpg"
+                alt="Red sneaker floating in the air"
+                className={styles.heroShoe}
+                animate={reduceMotion ? undefined : {
+                  y: [0, -18, 0],
+                  rotate: [-8, -3, -8],
+                }}
+                transition={{
+                  duration: 4,
+                  ease: 'easeInOut',
+                  repeat: Infinity,
+                }}
+                whileHover={reduceMotion ? undefined : { scale: 1.06, rotate: 0 }}
+              />
+              <motion.div
+                className={styles.shoeShadow}
+                animate={reduceMotion ? undefined : {
+                  scaleX: [1, 0.78, 1],
+                  opacity: [0.45, 0.25, 0.45],
+                }}
+                transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
+              />
+            </motion.div>
+            <div className={`${styles.floatingCard} ${styles.cardTop}`}>
+              <span>⚡</span> New drop
             </div>
-            <div className={styles.floatingCard} style={{ animationDelay: '0.5s' }}>
-              <span>👗</span> <span>Fashion</span>
-            </div>
-            <div className={styles.floatingCard} style={{ animationDelay: '1s' }}>
-              <span>✨</span> <span>Beauty</span>
+            <div className={`${styles.floatingCard} ${styles.cardBottom}`}>
+              <span>★</span> 4.9 rating
             </div>
           </div>
         </div>
