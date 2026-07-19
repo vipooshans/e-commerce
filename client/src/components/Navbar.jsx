@@ -1,9 +1,39 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { CART_ANIMATION_EVENT } from '../utils/cartAnimation';
 import styles from './Navbar.module.css';
+
+const AnimatedCartLink = ({ itemCount }) => {
+  const [impact, setImpact] = useState(0);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const handleImpact = () => setImpact((value) => value + 1);
+    window.addEventListener(CART_ANIMATION_EVENT, handleImpact);
+    return () => window.removeEventListener(CART_ANIMATION_EVENT, handleImpact);
+  }, []);
+
+  return (
+    <motion.div
+      key={impact}
+      className={styles.cartMotionWrap}
+      animate={impact && !reduceMotion ? {
+        rotate: [0, -16, 14, -10, 7, 0],
+        scale: [1, 1.16, 0.96, 1.08, 1],
+      } : undefined}
+      transition={{ duration: 0.48, delay: 0.52 }}
+    >
+      <Link to="/cart" className={styles.iconBtn} aria-label="Cart" data-cart-target>
+        <span>🛒</span>
+        {itemCount > 0 && <span className={styles.badge}>{itemCount}</span>}
+      </Link>
+    </motion.div>
+  );
+};
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -73,10 +103,7 @@ const Navbar = () => {
           )}
 
           {/* Cart */}
-          <Link to="/cart" className={styles.iconBtn} aria-label="Cart">
-            <span>🛒</span>
-            {itemCount > 0 && <span className={styles.badge}>{itemCount}</span>}
-          </Link>
+          <AnimatedCartLink itemCount={itemCount} />
 
           {/* User */}
           {user ? (
@@ -114,10 +141,7 @@ const Navbar = () => {
 
         {/* Mobile: cart + hamburger */}
         <div className={styles.mobileRight}>
-          <Link to="/cart" className={styles.iconBtn} aria-label="Cart">
-            <span>🛒</span>
-            {itemCount > 0 && <span className={styles.badge}>{itemCount}</span>}
-          </Link>
+          <AnimatedCartLink itemCount={itemCount} />
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}

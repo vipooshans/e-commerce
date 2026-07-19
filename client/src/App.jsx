@@ -6,6 +6,7 @@ import { ToastProvider } from './context/ToastContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/AdminRoute';
 import Navbar from './components/Navbar';
+import CartAnimation from './components/CartAnimation';
 import Footer from './components/Footer';
 
 // Pages (lazy-ish — direct imports for now)
@@ -26,6 +27,7 @@ import OrderManager from './pages/admin/OrderManager';
 const AppContent = () => (
   <BrowserRouter>
     <Navbar />
+    <CartAnimation />
     <main style={{ flex: 1 }}>
       <Routes>
         {/* Public */}

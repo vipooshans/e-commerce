@@ -112,6 +112,11 @@
 }
 .iconBtn:hover { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.4); transform: translateY(-1px); }
 
+.cartMotionWrap {
+  display: inline-flex;
+  transform-origin: 50% 75%;
+}
+
 .badge {
   position: absolute;
   top: -4px;

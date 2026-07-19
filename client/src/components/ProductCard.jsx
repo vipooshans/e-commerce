@@ -5,8 +5,8 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import { IMAGE_BASE_URL } from '../services/api';
+import { triggerCartAnimation } from '../utils/cartAnimation';
 import StarRating from './StarRating';
-import Confetti from './Confetti';
 import styles from './ProductCard.module.css';
 
 const ProductCard = ({ product }) => {
@@ -14,7 +14,6 @@ const ProductCard = ({ product }) => {
   const { isInWishlist, addItem, removeItem } = useWishlist();
   const { user } = useAuth();
   const { addToast } = useToast();
-  const [confetti, setConfetti] = useState(false);
   const [adding, setAdding] = useState(false);
 
   const inWishlist = isInWishlist(product._id);
@@ -33,7 +32,8 @@ const ProductCard = ({ product }) => {
     if (product.stock === 0) return;
     setAdding(true);
     addToCart(product, 1);
-    setConfetti(true);
+    const productImage = e.currentTarget.closest(`.${styles.imageWrap}`)?.querySelector('img');
+    triggerCartAnimation(imageSrc, productImage || e.currentTarget);
     addToast(`${product.name} added to cart!`, 'success');
     setTimeout(() => setAdding(false), 600);
   };
@@ -51,9 +51,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <>
-      <Confetti active={confetti} onDone={() => setConfetti(false)} />
-      <Link to={`/products/${product._id}`} className={styles.card} id={`product-card-${product._id}`}>
+    <Link to={`/products/${product._id}`} className={styles.card} id={`product-card-${product._id}`}>
         {/* Image */}
         <div className={styles.imageWrap}>
           {imageSrc ? (
@@ -104,8 +102,7 @@ const ProductCard = ({ product }) => {
             )}
           </div>
         </div>
-      </Link>
-    </>
+    </Link>
   );
 };
 

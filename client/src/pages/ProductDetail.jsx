@@ -6,9 +6,9 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import StarRating from '../components/StarRating';
-import Confetti from '../components/Confetti';
 import Loader from '../components/Loader';
 import { IMAGE_BASE_URL } from '../services/api';
+import { triggerCartAnimation } from '../utils/cartAnimation';
 import styles from './ProductDetail.module.css';
 
 const ProductDetail = () => {
@@ -23,7 +23,6 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [activeImage, setActiveImage] = useState(0);
   const [qty, setQty] = useState(1);
-  const [confetti, setConfetti] = useState(false);
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState('');
   const [submittingReview, setSubmittingReview] = useState(false);
@@ -50,10 +49,11 @@ const ProductDetail = () => {
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : 0;
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (event) => {
     if (product.stock === 0) return;
     addToCart(product, qty);
-    setConfetti(true);
+    const productImage = document.querySelector(`.${styles.mainImg}`);
+    triggerCartAnimation(images?.[activeImage], productImage || event?.currentTarget);
     addToast(`${product.name} added to cart!`, 'success');
   };
 
@@ -90,7 +90,6 @@ const ProductDetail = () => {
 
   return (
     <div className="page-enter">
-      <Confetti active={confetti} onDone={() => setConfetti(false)} />
       <div className="container" style={{ paddingTop: 40, paddingBottom: 80 }}>
         {/* Breadcrumb */}
         <div className={styles.breadcrumb}>
