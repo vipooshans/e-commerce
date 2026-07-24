@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { getFeaturedProducts } from '../services/productService';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import styles from './Home.module.css';
+
+const ProductScrollScene = lazy(() => import('../components/ProductScrollScene'));
 
 const CATEGORIES = [
   { name: 'Electronics', icon: '💻', color: '#3B82F6' },
@@ -103,6 +105,11 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Scroll-driven 3D product ── */}
+      <Suspense fallback={null}>
+        <ProductScrollScene />
+      </Suspense>
 
       {/* ── Categories ── */}
       <section className="section-sm">
