@@ -17,6 +17,7 @@ if (import.meta.env.PROD) {
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
+  timeout: 45000,
 });
 
 // Attach JWT
@@ -26,13 +27,24 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-// Handle 401
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Retry network failures (Render cold starts often look like CORS/Network Error once)
 api.interceptors.response.use(
   (res) => res,
-  (err) => {
+  async (err) => {
+    const config = err.config;
+    const isNetworkError = !err.response && (err.message === 'Network Error' || err.code === 'ERR_NETWORK');
+    const retries = config?.__retryCount || 0;
+
+    if (isNetworkError && config && retries < 3) {
+      config.__retryCount = retries + 1;
+      await sleep(1200 * config.__retryCount);
+      return api.request(config);
+    }
+
     if (err.response?.status === 401) {
       localStorage.removeItem('lumora_token');
-      // Only redirect if not already on login page
       if (!window.location.pathname.includes('/login')) {
         window.location.href = '/login';
       }
@@ -40,5 +52,9 @@ api.interceptors.response.use(
     return Promise.reject(err.response?.data?.message || err.message || 'Something went wrong');
   }
 );
+
+/** Ping API on boot so Render free tier wakes before product calls. */
+export const wakeApi = () =>
+  api.get('/health').catch(() => null);
 
 export default api;

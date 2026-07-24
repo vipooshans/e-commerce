@@ -38,8 +38,8 @@ app.use(cors({
       process.env.NODE_ENV !== 'production' &&
       /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
 
-    // Any Vercel deployment (preview or production) for this project
-    const isVercelOrigin = /^https:\/\/[\w-]+\.vercel\.app$/.test(origin);
+    // Any Vercel deployment (preview or production)
+    const isVercelOrigin = /^https:\/\/[\w.-]+\.vercel\.app$/i.test(origin);
 
     const isAllowed =
       allowedOrigins.includes(origin) ||
@@ -49,10 +49,14 @@ app.use(cors({
     if (isAllowed) {
       callback(null, true);
     } else {
-      callback(null, false); // false avoids noisy stack traces; browser still blocks
+      console.warn(`[CORS] Blocked origin: ${origin}`);
+      callback(null, false);
     }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 204,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

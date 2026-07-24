@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
@@ -9,6 +9,7 @@ import AdminRoute from './components/AdminRoute';
 import Navbar from './components/Navbar';
 import CartAnimation from './components/CartAnimation';
 import Footer from './components/Footer';
+import { wakeApi } from './services/api';
 
 // Pages (lazy-ish — direct imports for now)
 import Home from './pages/Home';
@@ -93,6 +94,11 @@ function App() {
       /* ignore quota / private mode */
     }
     setShowBoot(false);
+  }, []);
+
+  useEffect(() => {
+    // Wake Render free-tier before product fetches (cold starts can look like CORS errors)
+    wakeApi();
   }, []);
 
   return (
