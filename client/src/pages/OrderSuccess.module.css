@@ -30,20 +30,20 @@
 
 h1 { font-size: 2rem; }
 
-.sub { color: #B8A9D9; max-width: 400px; }
+.sub { color: #94A3B8; max-width: 400px; }
 
 .orderId {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(124,58,237,0.1);
-  border: 1px solid rgba(124,58,237,0.25);
+  background: rgba(37,99,235,0.1);
+  border: 1px solid rgba(37,99,235,0.25);
   border-radius: 12px;
   padding: 12px 20px;
   font-size: 0.9rem;
-  color: #B8A9D9;
+  color: #94A3B8;
 }
-.orderId strong { color: #9D63F7; font-size: 1rem; letter-spacing: 0.05em; }
+.orderId strong { color: #3B82F6; font-size: 1rem; letter-spacing: 0.05em; }
 
 .details {
   width: 100%;
@@ -63,7 +63,7 @@ h1 { font-size: 2rem; }
   font-size: 0.9rem;
 }
 .detailRow:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.06); }
-.detailRow span:first-child { color: #7A6A9B; }
-.detailRow span:last-child { color: #F1EEF9; font-weight: 500; }
+.detailRow span:first-child { color: #64748B; }
+.detailRow span:last-child { color: #FFFFFF; font-weight: 500; }
 
 .btns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }

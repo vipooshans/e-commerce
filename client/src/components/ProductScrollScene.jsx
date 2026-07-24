@@ -16,10 +16,10 @@ const STAGES = [
   { id: 'color', label: 'Color shift', from: 0.55, to: 1 },
 ];
 
-const COLOR_START = new THREE.Color('#7C3AED');
-const COLOR_MID = new THREE.Color('#EC4899');
+const COLOR_START = new THREE.Color('#2563EB');
+const COLOR_MID = new THREE.Color('#06B6D4');
 const COLOR_END = new THREE.Color('#3B82F6');
-const ACCENT_START = new THREE.Color('#F1EEF9');
+const ACCENT_START = new THREE.Color('#FFFFFF');
 const ACCENT_END = new THREE.Color('#FBBF24');
 
 const PARTS = [
@@ -195,10 +195,10 @@ function CameraRig({ progress }) {
 function Scene({ progress }) {
   return (
     <>
-      <color attach="background" args={['#0B0714']} />
+      <color attach="background" args={['#020617']} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[4, 6, 3]} intensity={1.35} castShadow />
-      <pointLight position={[-3, 2, -2]} intensity={0.7} color="#EC4899" />
+      <pointLight position={[-3, 2, -2]} intensity={0.7} color="#06B6D4" />
       <pointLight position={[2, -1, 3]} intensity={0.45} color="#3B82F6" />
       <CameraRig progress={progress} />
       <Sneaker progress={progress} />

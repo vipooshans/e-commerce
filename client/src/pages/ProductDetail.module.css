@@ -1,11 +1,11 @@
 .breadcrumb {
   font-size: 0.85rem;
-  color: #7A6A9B;
+  color: #64748B;
   margin-bottom: 32px;
 }
-.breadcrumb a { color: #9D63F7; }
+.breadcrumb a { color: #3B82F6; }
 .breadcrumb a:hover { text-decoration: underline; }
-.breadcrumb span { color: #B8A9D9; }
+.breadcrumb span { color: #94A3B8; }
 
 .grid {
   display: grid;
@@ -19,7 +19,7 @@
 .mainImage {
   position: relative;
   aspect-ratio: 1;
-  background: #130D22;
+  background: #0F172A;
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.08);
@@ -40,14 +40,14 @@
   align-items: center;
   justify-content: center;
   font-size: 5rem;
-  background: linear-gradient(135deg, #1A1230, #221840);
+  background: linear-gradient(135deg, #111827, #1E293B);
 }
 
 .discountBadge {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: linear-gradient(135deg, #F97316, #EC4899);
+  background: linear-gradient(135deg, #0EA5E9, #06B6D4);
   color: #fff;
   font-size: 0.8rem;
   font-weight: 700;
@@ -64,11 +64,11 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
-  background: #130D22;
+  background: #0F172A;
 }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
-.thumb:hover { border-color: rgba(124,58,237,0.5); }
-.activeThumb { border-color: #7C3AED; }
+.thumb:hover { border-color: rgba(37,99,235,0.5); }
+.activeThumb { border-color: #2563EB; }
 
 /* Info */
 .info { display: flex; flex-direction: column; gap: 16px; }
@@ -78,25 +78,25 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #9D63F7;
+  color: #3B82F6;
 }
 
 .name { font-size: 1.75rem; font-weight: 700; line-height: 1.25; }
 
 .ratingRow { display: flex; align-items: center; gap: 10px; }
 .ratingNum { font-size: 1rem; font-weight: 700; color: #FBBF24; }
-.numReviews { font-size: 0.85rem; color: #7A6A9B; }
+.numReviews { font-size: 0.85rem; color: #64748B; }
 
 .priceBlock { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .price {
   font-size: 2rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-.originalPrice { font-size: 1rem; color: #7A6A9B; text-decoration: line-through; }
+.originalPrice { font-size: 1rem; color: #64748B; text-decoration: line-through; }
 .saving { font-size: 0.85rem; color: #22C55E; font-weight: 600; }
 
 .stockRow { display: flex; align-items: center; gap: 8px; }
@@ -117,20 +117,20 @@
   height: 40px;
   background: none;
   border: none;
-  color: #F1EEF9;
+  color: #FFFFFF;
   font-size: 1.2rem;
   cursor: pointer;
   transition: background 0.2s;
 }
-.qtyBtn:hover { background: rgba(124,58,237,0.2); }
+.qtyBtn:hover { background: rgba(37,99,235,0.2); }
 .qty { width: 40px; text-align: center; font-weight: 700; }
 
-.wishActive { color: #F472B6 !important; border-color: rgba(236,72,153,0.4) !important; }
+.wishActive { color: #38BDF8 !important; border-color: rgba(6,182,212,0.4) !important; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .tag {
   font-size: 0.78rem;
-  color: #7A6A9B;
+  color: #64748B;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 9999px;
@@ -149,7 +149,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 0.95rem;
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
@@ -157,8 +157,8 @@
   transition: all 0.2s;
   margin-bottom: -1px;
 }
-.tab:hover { color: #B8A9D9; }
-.activeTab { color: #9D63F7; border-bottom-color: #7C3AED; font-weight: 600; }
+.tab:hover { color: #94A3B8; }
+.activeTab { color: #3B82F6; border-bottom-color: #2563EB; font-weight: 600; }
 
 .descCard { padding: 28px; }
 
@@ -184,7 +184,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,7 +192,7 @@
   font-size: 0.9rem;
   flex-shrink: 0;
 }
-.reviewDate { margin-left: auto; font-size: 0.8rem; color: #7A6A9B; }
+.reviewDate { margin-left: auto; font-size: 0.8rem; color: #64748B; }
 
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }

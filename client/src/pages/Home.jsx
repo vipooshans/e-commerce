@@ -9,9 +9,9 @@ const Hero3D = lazy(() => import('../components/Hero3D'));
 
 const CATEGORIES = [
   { name: 'Electronics', icon: '💻', color: '#3B82F6' },
-  { name: 'Fashion', icon: '👗', color: '#EC4899' },
-  { name: 'Home & Kitchen', icon: '🏠', color: '#F97316' },
-  { name: 'Beauty & Personal Care', icon: '✨', color: '#7C3AED' },
+  { name: 'Fashion', icon: '👗', color: '#06B6D4' },
+  { name: 'Home & Kitchen', icon: '🏠', color: '#0EA5E9' },
+  { name: 'Beauty & Personal Care', icon: '✨', color: '#2563EB' },
   { name: 'Sports & Fitness', icon: '🏋️', color: '#22C55E' },
   { name: 'Books', icon: '📚', color: '#FBBF24' },
 ];

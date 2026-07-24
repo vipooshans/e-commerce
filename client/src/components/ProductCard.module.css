@@ -12,14 +12,14 @@
 }
 .card:hover {
   transform: translateY(-6px);
-  border-color: rgba(124,58,237,0.3);
-  box-shadow: 0 16px 40px rgba(124,58,237,0.2);
+  border-color: rgba(37,99,235,0.3);
+  box-shadow: 0 16px 40px rgba(37,99,235,0.2);
 }
 
 .imageWrap {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: #130D22;
+  background: #0F172A;
   overflow: hidden;
 }
 
@@ -38,14 +38,14 @@
   align-items: center;
   justify-content: center;
   font-size: 3rem;
-  background: linear-gradient(135deg, #1A1230 0%, #221840 100%);
+  background: linear-gradient(135deg, #111827 0%, #1E293B 100%);
 }
 
 .discountBadge {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: linear-gradient(135deg, #F97316, #EC4899);
+  background: linear-gradient(135deg, #0EA5E9, #06B6D4);
   color: #fff;
   font-size: 0.72rem;
   font-weight: 700;
@@ -57,11 +57,11 @@
 .outOfStock {
   position: absolute;
   inset: 0;
-  background: rgba(11,7,20,0.7);
+  background: rgba(2,6,23,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #B8A9D9;
+  color: #94A3B8;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -73,7 +73,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(11,7,20,0.95) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(2,6,23,0.95) 0%, transparent 100%);
   padding: 16px;
   transform: translateY(100%);
   transition: transform 0.3s ease;
@@ -90,10 +90,10 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(11,7,20,0.7);
+  background: rgba(2,6,23,0.7);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,0.15);
-  color: #B8A9D9;
+  color: #94A3B8;
   font-size: 1.1rem;
   cursor: pointer;
   display: flex;
@@ -102,8 +102,8 @@
   transition: all 0.2s;
   z-index: 3;
 }
-.wishBtn:hover { background: rgba(236,72,153,0.2); border-color: rgba(236,72,153,0.4); color: #F472B6; }
-.wishActive { color: #F472B6; border-color: rgba(236,72,153,0.4); background: rgba(236,72,153,0.15); }
+.wishBtn:hover { background: rgba(6,182,212,0.2); border-color: rgba(6,182,212,0.4); color: #38BDF8; }
+.wishActive { color: #38BDF8; border-color: rgba(6,182,212,0.4); background: rgba(6,182,212,0.15); }
 
 .info {
   padding: 16px;
@@ -118,13 +118,13 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #9D63F7;
+  color: #3B82F6;
 }
 
 .name {
   font-size: 0.95rem;
   font-weight: 600;
-  color: #F1EEF9;
+  color: #FFFFFF;
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -140,7 +140,7 @@
 
 .numReviews {
   font-size: 0.78rem;
-  color: #7A6A9B;
+  color: #64748B;
 }
 
 .priceRow {
@@ -153,7 +153,7 @@
 .price {
   font-size: 1.05rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -161,6 +161,6 @@
 
 .originalPrice {
   font-size: 0.85rem;
-  color: #7A6A9B;
+  color: #64748B;
   text-decoration: line-through;
 }

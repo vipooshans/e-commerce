@@ -72,7 +72,7 @@ function CameraRig({ progress, parallax, glowRef }) {
         ref={light}
         position={[3.2, 4.5, 2.5]}
         intensity={1.25}
-        color="#FFE4C8"
+        color="#E0F2FE"
         castShadow
         shadow-mapSize={[1024, 1024]}
       />
@@ -80,9 +80,9 @@ function CameraRig({ progress, parallax, glowRef }) {
         ref={rim}
         position={[-3.5, 1.5, -2.5]}
         intensity={0.7}
-        color="#C4B5FD"
+        color="#7DD3FC"
       />
-      <pointLight position={[1.5, -0.5, 2]} intensity={0.35} color="#EC4899" />
+      <pointLight position={[1.5, -0.5, 2]} intensity={0.35} color="#06B6D4" />
     </>
   );
 }

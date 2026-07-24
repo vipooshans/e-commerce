@@ -18,12 +18,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 0.9rem;
   font-weight: 500;
   flex: 1;
 }
-.stepActive { color: #F1EEF9; font-weight: 600; }
+.stepActive { color: #FFFFFF; font-weight: 600; }
 .stepDone { color: #22C55E; }
 
 .stepNum {
@@ -41,7 +41,7 @@
   transition: all 0.3s;
 }
 .stepActive .stepNum {
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   border-color: transparent;
   color: #fff;
 }
@@ -88,13 +88,13 @@
   transition: all 0.2s;
 }
 .payOption input { display: none; }
-.payOption:hover { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.06); }
-.payActive { border-color: #7C3AED; background: rgba(124,58,237,0.12); }
+.payOption:hover { border-color: rgba(37,99,235,0.3); background: rgba(37,99,235,0.06); }
+.payActive { border-color: #2563EB; background: rgba(37,99,235,0.12); }
 
 .payIcon { font-size: 1.5rem; }
 .payOption div { display: flex; flex-direction: column; gap: 2px; }
-.payOption strong { color: #F1EEF9; font-size: 0.95rem; }
-.payOption small { color: #7A6A9B; font-size: 0.8rem; }
+.payOption strong { color: #FFFFFF; font-size: 0.95rem; }
+.payOption small { color: #64748B; font-size: 0.8rem; }
 
 .stripeWrap { display: flex; flex-direction: column; gap: 10px; }
 
@@ -107,11 +107,11 @@
 
 .testCardHint {
   font-size: 0.8rem;
-  color: #9D63F7;
-  background: rgba(124,58,237,0.1);
+  color: #3B82F6;
+  background: rgba(37,99,235,0.1);
   border-radius: 8px;
   padding: 10px 14px;
-  border: 1px solid rgba(124,58,237,0.2);
+  border: 1px solid rgba(37,99,235,0.2);
 }
 
 .stepBtns { display: flex; gap: 12px; justify-content: flex-end; }
@@ -129,11 +129,11 @@
 
 .summaryItems { display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto; }
 .summaryItem { display: flex; justify-content: space-between; align-items: start; gap: 8px; }
-.summaryItemName { font-size: 0.85rem; color: #B8A9D9; flex: 1; }
+.summaryItemName { font-size: 0.85rem; color: #94A3B8; flex: 1; }
 
 .divider { height: 1px; background: rgba(255,255,255,0.08); }
-.summaryLine { display: flex; justify-content: space-between; font-size: 0.9rem; color: #B8A9D9; }
-.total { font-size: 1.1rem; font-weight: 700; color: #F1EEF9; }
+.summaryLine { display: flex; justify-content: space-between; font-size: 0.9rem; color: #94A3B8; }
+.total { font-size: 1.1rem; font-weight: 700; color: #FFFFFF; }
 
 @media (max-width: 900px) {
   .layout { grid-template-columns: 1fr; }

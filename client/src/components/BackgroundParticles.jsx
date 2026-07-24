@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 /**
- * Subtle purple particle field + floating glass discs for the hero backdrop.
+ * Subtle cyan particle field + floating glass discs for the hero backdrop.
  */
 export default function BackgroundParticles({ progress, reducedMotion = false }) {
   const points = useRef(null);
@@ -13,8 +13,8 @@ export default function BackgroundParticles({ progress, reducedMotion = false })
     const count = 140;
     const pos = new Float32Array(count * 3);
     const col = new Float32Array(count * 3);
-    const c1 = new THREE.Color('#7C3AED');
-    const c2 = new THREE.Color('#EC4899');
+    const c1 = new THREE.Color('#2563EB');
+    const c2 = new THREE.Color('#06B6D4');
     const tmp = new THREE.Color();
     for (let i = 0; i < count; i += 1) {
       pos[i * 3] = (Math.random() - 0.5) * 10;
@@ -81,7 +81,7 @@ export default function BackgroundParticles({ progress, reducedMotion = false })
         >
           <circleGeometry args={[0.55 + i * 0.15, 48]} />
           <meshBasicMaterial
-            color={i === 1 ? '#EC4899' : '#7C3AED'}
+            color={i === 1 ? '#06B6D4' : '#2563EB'}
             transparent
             opacity={0.07}
             depthWrite={false}

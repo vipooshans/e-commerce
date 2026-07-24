@@ -18,7 +18,7 @@ function RotatingCube({ position }) {
   return (
     <group position={position}>
       <RoundedBox ref={ref} args={[0.55, 0.55, 0.55]} radius={0.08} smoothness={4} castShadow>
-        <meshStandardMaterial color="#7C3AED" metalness={0.35} roughness={0.28} />
+        <meshStandardMaterial color="#2563EB" metalness={0.35} roughness={0.28} />
       </RoundedBox>
     </group>
   );
@@ -39,20 +39,20 @@ function ShoppingBag({ position }) {
     <group ref={ref} position={position} scale={1.15}>
       {/* Bag body */}
       <RoundedBox args={[0.85, 0.95, 0.35]} radius={0.06} smoothness={4} castShadow>
-        <meshStandardMaterial color="#EC4899" metalness={0.12} roughness={0.4} />
+        <meshStandardMaterial color="#06B6D4" metalness={0.12} roughness={0.4} />
       </RoundedBox>
       {/* Front panel fold */}
       <RoundedBox args={[0.72, 0.78, 0.06]} radius={0.04} position={[0, -0.02, 0.2]} castShadow>
-        <meshStandardMaterial color="#F472B6" metalness={0.08} roughness={0.45} />
+        <meshStandardMaterial color="#38BDF8" metalness={0.08} roughness={0.45} />
       </RoundedBox>
       {/* Handles */}
       <mesh position={[-0.22, 0.62, 0]} rotation={[0, 0, 0.08]}>
         <torusGeometry args={[0.18, 0.035, 10, 24, Math.PI]} />
-        <meshStandardMaterial color="#F1EEF9" metalness={0.2} roughness={0.35} />
+        <meshStandardMaterial color="#FFFFFF" metalness={0.2} roughness={0.35} />
       </mesh>
       <mesh position={[0.22, 0.62, 0]} rotation={[0, 0, -0.08]}>
         <torusGeometry args={[0.18, 0.035, 10, 24, Math.PI]} />
-        <meshStandardMaterial color="#F1EEF9" metalness={0.2} roughness={0.35} />
+        <meshStandardMaterial color="#FFFFFF" metalness={0.2} roughness={0.35} />
       </mesh>
     </group>
   );
@@ -77,17 +77,17 @@ function SpinningPackage({ position }) {
       {/* Vertical ribbon */}
       <mesh ref={ribbon} position={[0, 0, 0]}>
         <boxGeometry args={[0.12, 0.58, 0.72]} />
-        <meshStandardMaterial color="#7C3AED" metalness={0.2} roughness={0.35} />
+        <meshStandardMaterial color="#2563EB" metalness={0.2} roughness={0.35} />
       </mesh>
       {/* Horizontal ribbon */}
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[0.72, 0.12, 0.72]} />
-        <meshStandardMaterial color="#EC4899" metalness={0.2} roughness={0.35} />
+        <meshStandardMaterial color="#06B6D4" metalness={0.2} roughness={0.35} />
       </mesh>
       {/* Bow knot */}
       <mesh position={[0, 0.32, 0]}>
         <sphereGeometry args={[0.09, 16, 16]} />
-        <meshStandardMaterial color="#9D63F7" metalness={0.25} roughness={0.3} />
+        <meshStandardMaterial color="#3B82F6" metalness={0.25} roughness={0.3} />
       </mesh>
     </group>
   );
@@ -105,7 +105,7 @@ function Scene({ reducedMotion }) {
     <>
       <ambientLight intensity={0.55} />
       <directionalLight position={[3, 5, 4]} intensity={1.25} />
-      <pointLight position={[-3, 2, -2]} intensity={0.65} color="#EC4899" />
+      <pointLight position={[-3, 2, -2]} intensity={0.65} color="#06B6D4" />
       <pointLight position={[2, -1, 3]} intensity={0.4} color="#3B82F6" />
 
       <group ref={group}>

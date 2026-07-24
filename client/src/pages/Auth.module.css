@@ -11,8 +11,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 40%, rgba(124,58,237,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 60%, rgba(236,72,153,0.12) 0%, transparent 60%);
+    radial-gradient(ellipse at 30% 40%, rgba(37,99,235,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(6,182,212,0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .card h2 { font-size: 1.6rem; }
-.card p { color: #7A6A9B; font-size: 0.9rem; margin-bottom: 8px; }
+.card p { color: #64748B; font-size: 0.9rem; margin-bottom: 8px; }
 
 .form {
   display: flex;
@@ -56,23 +56,23 @@
 }
 
 .testCreds {
-  background: rgba(124,58,237,0.08);
-  border: 1px solid rgba(124,58,237,0.2);
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
   border-radius: 10px;
   padding: 12px 14px;
   font-size: 0.78rem;
-  color: #B8A9D9;
+  color: #94A3B8;
   line-height: 1.7;
 }
-.testCreds code { color: #9D63F7; font-size: 0.78rem; }
+.testCreds code { color: #3B82F6; font-size: 0.78rem; }
 
 .switchLink {
   margin-top: 8px;
   text-align: center;
   font-size: 0.875rem;
-  color: #7A6A9B;
+  color: #64748B;
 }
-.switchLink a { color: #9D63F7; font-weight: 600; }
+.switchLink a { color: #3B82F6; font-weight: 600; }
 .switchLink a:hover { text-decoration: underline; }
 
 @media (max-width: 480px) {

@@ -1,8 +1,20 @@
 .footer {
   margin-top: auto;
-  background: #0B0714;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  background: #020617;
+  border-top: 1px solid transparent;
   padding-top: 60px;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2563EB, #06B6D4, transparent);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.35);
 }
 
 .inner {
@@ -15,7 +27,7 @@
 .brand p {
   margin-top: 12px;
   font-size: 0.9rem;
-  color: #7A6A9B;
+  color: #64748B;
   max-width: 280px;
   line-height: 1.7;
 }
@@ -29,7 +41,7 @@
 }
 .logoGem {
   font-size: 1.3rem;
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -52,7 +64,7 @@
   font-size: 0.85rem;
   transition: all 0.2s;
 }
-.socialBtn:hover { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+.socialBtn:hover { background: rgba(37,99,235,0.2); border-color: rgba(37,99,235,0.4); transform: translateY(-2px); }
 
 .links {
   display: grid;
@@ -61,7 +73,7 @@
 }
 
 .linkGroup h4 {
-  color: #F1EEF9;
+  color: #FFFFFF;
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -70,12 +82,12 @@
 }
 .linkGroup a {
   display: block;
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 0.9rem;
   margin-bottom: 10px;
   transition: color 0.2s;
 }
-.linkGroup a:hover { color: #B8A9D9; }
+.linkGroup a:hover { color: #94A3B8; }
 
 .bottom {
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -86,7 +98,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.bottom p { font-size: 0.85rem; color: #7A6A9B; }
+.bottom p { font-size: 0.85rem; color: #64748B; }
 
 .paymentIcons { display: flex; gap: 8px; }
 .payIcon {

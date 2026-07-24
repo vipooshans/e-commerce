@@ -127,7 +127,7 @@ const CheckoutForm = () => {
               <p style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem', margin: '0 0 10px 0' }}>
                 <span style={{ fontSize: '1.4rem' }}>💬</span> <strong>WhatsApp Order Confirmation</strong>
               </p>
-              <p style={{ fontSize: '0.9rem', color: '#A098B8', margin: 0, lineHeight: '1.4' }}>
+              <p style={{ fontSize: '0.9rem', color: '#94A3B8', margin: 0, lineHeight: '1.4' }}>
                 Your order details will be processed, and you will be redirected to WhatsApp to send us the order and customer information.
               </p>
             </div>

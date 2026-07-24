@@ -131,7 +131,7 @@ const ProductManager = () => {
                       <span>
                         {imgSrc ? <img src={imgSrc} alt={p.name} style={{ width: 44, height: 44, borderRadius: 8, objectFit: 'cover' }} /> : <span style={{ fontSize: '1.5rem' }}>🛍️</span>}
                       </span>
-                      <span style={{ fontWeight: 600, color: '#F1EEF9', fontSize: '0.875rem' }}>{p.name}</span>
+                      <span style={{ fontWeight: 600, color: '#FFFFFF', fontSize: '0.875rem' }}>{p.name}</span>
                       <span>Rs {p.price.toLocaleString('en-LK')}</span>
                       <span>{p.category}</span>
                       <span style={{ color: p.stock === 0 ? '#EF4444' : '#22C55E' }}>{p.stock}</span>
@@ -203,7 +203,7 @@ const ProductManager = () => {
                     placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
                     id="product-images"
                   />
-                  <p style={{ fontSize: '0.8rem', color: '#7A6A9B', marginTop: 4 }}>
+                  <p style={{ fontSize: '0.8rem', color: '#64748B', marginTop: 4 }}>
                     Paste up to 5 http(s) image URLs, separated by commas or new lines.
                   </p>
                   {previewSrc && (

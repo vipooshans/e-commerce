@@ -13,18 +13,18 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
   font-weight: 700;
   flex-shrink: 0;
-  box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.4);
 }
 
 .header h1 { font-size: 1.5rem; }
-.header p { color: #7A6A9B; font-size: 0.9rem; margin-top: 2px; }
+.header p { color: #64748B; font-size: 0.9rem; margin-top: 2px; }
 
 /* Tabs */
 .tabs {
@@ -39,7 +39,7 @@
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 0.95rem;
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
@@ -47,8 +47,8 @@
   transition: all 0.2s;
   margin-bottom: -1px;
 }
-.tab:hover { color: #B8A9D9; }
-.activeTab { color: #9D63F7; border-bottom-color: #7C3AED; font-weight: 600; }
+.tab:hover { color: #94A3B8; }
+.activeTab { color: #3B82F6; border-bottom-color: #2563EB; font-weight: 600; }
 
 /* Empty state */
 .empty {
@@ -73,7 +73,7 @@
 }
 
 .orderMeta { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 200px; }
-.orderId { font-weight: 700; font-size: 0.9rem; color: #F1EEF9; letter-spacing: 0.04em; }
+.orderId { font-weight: 700; font-size: 0.9rem; color: #FFFFFF; letter-spacing: 0.04em; }
 
 .orderInfo {
   display: flex;
@@ -82,13 +82,13 @@
   flex: 2;
   flex-wrap: wrap;
   font-size: 0.875rem;
-  color: #B8A9D9;
+  color: #94A3B8;
 }
 
 /* Addresses */
 .addressGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
 .addressCard { padding: 20px; display: flex; flex-direction: column; gap: 8px; }
-.addressCard p { font-size: 0.875rem; color: #B8A9D9; }
+.addressCard p { font-size: 0.875rem; color: #94A3B8; }
 
 /* Settings */
 .settingsCard { padding: 28px; max-width: 540px; }

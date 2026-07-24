@@ -2,10 +2,10 @@
   position: relative;
   height: 320vh;
   background:
-    radial-gradient(ellipse at 50% 20%, rgba(124, 58, 237, 0.22) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 60%, rgba(236, 72, 153, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 20%, rgba(37, 99, 235, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 60%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
     radial-gradient(ellipse at 20% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 45%),
-    #0B0714;
+    #020617;
 }
 
 .sticky {
@@ -52,9 +52,9 @@
   margin-bottom: 14px;
   padding: 6px 14px;
   border-radius: 9999px;
-  border: 1px solid rgba(124, 58, 237, 0.35);
-  background: rgba(124, 58, 237, 0.14);
-  color: #9D63F7;
+  border: 1px solid rgba(37, 99, 235, 0.35);
+  background: rgba(37, 99, 235, 0.14);
+  color: #3B82F6;
   font-size: 0.82rem;
   font-weight: 600;
 }
@@ -66,7 +66,7 @@
 }
 
 .header p {
-  color: #B8A9D9;
+  color: #94A3B8;
   line-height: 1.65;
   max-width: 360px;
 }
@@ -83,17 +83,17 @@
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.04);
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 0.78rem;
   font-weight: 600;
   transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
 }
 
 .stageActive {
-  color: #F1EEF9;
-  border-color: rgba(157, 99, 247, 0.55);
-  background: rgba(124, 58, 237, 0.22);
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.25);
+  color: #FFFFFF;
+  border-color: rgba(56, 189, 248, 0.55);
+  background: rgba(37, 99, 235, 0.22);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
 }
 
 .progressTrack {
@@ -112,7 +112,7 @@
   width: 100%;
   height: 0%;
   border-radius: inherit;
-  background: linear-gradient(180deg, #7C3AED, #EC4899);
+  background: linear-gradient(180deg, #2563EB, #06B6D4);
   transition: height 0.05s linear;
 }
 

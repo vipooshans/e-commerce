@@ -60,14 +60,14 @@ const OrderManager = () => {
                 <span>Order ID</span><span>Customer</span><span>Total</span><span>Payment</span><span>Status</span><span>Date</span>
               </div>
               {filtered.length === 0 ? (
-                <p style={{ textAlign: 'center', padding: '32px 0', color: '#7A6A9B' }}>No orders found</p>
+                <p style={{ textAlign: 'center', padding: '32px 0', color: '#64748B' }}>No orders found</p>
               ) : filtered.map((order) => (
                 <div key={order._id} className={styles.tableRow} style={{ gridTemplateColumns: '120px 1fr 130px 100px 160px 120px' }}>
-                  <Link to={`/order/${order._id}`} style={{ color: '#9D63F7', fontWeight: 600, fontSize: '0.875rem' }} id={`order-link-${order._id}`}>
+                  <Link to={`/order/${order._id}`} style={{ color: '#3B82F6', fontWeight: 600, fontSize: '0.875rem' }} id={`order-link-${order._id}`}>
                     #{order._id.slice(-6).toUpperCase()}
                   </Link>
-                  <span>{order.user?.name || '—'}<br /><small style={{ color: '#7A6A9B' }}>{order.user?.email}</small></span>
-                  <span style={{ fontWeight: 600, color: '#F1EEF9' }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
+                  <span>{order.user?.name || '—'}<br /><small style={{ color: '#64748B' }}>{order.user?.email}</small></span>
+                  <span style={{ fontWeight: 600, color: '#FFFFFF' }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
                   <span>
                     <span className={`badge ${order.isPaid ? 'badge-green' : 'badge-coral'}`}>{order.isPaid ? 'Paid' : 'Unpaid'}</span>
                   </span>

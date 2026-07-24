@@ -6,7 +6,7 @@ import { getProducts } from '../../services/productService';
 import Loader from '../../components/Loader';
 import styles from './Admin.module.css';
 
-const COLORS = ['#7C3AED', '#EC4899', '#3B82F6', '#F97316', '#22C55E', '#FBBF24'];
+const COLORS = ['#2563EB', '#06B6D4', '#3B82F6', '#0EA5E9', '#22C55E', '#FBBF24'];
 
 const StatCard = ({ icon, label, value, color }) => (
   <div className={styles.statCard} style={{ '--stat-color': color }}>
@@ -40,7 +40,7 @@ const Dashboard = () => {
 
   if (loading) return <Loader fullScreen />;
 
-  const STATUS_COLORS = { Processing: '#7C3AED', Shipped: '#EC4899', 'Out for Delivery': '#F97316', Delivered: '#22C55E', Cancelled: '#EF4444' };
+  const STATUS_COLORS = { Processing: '#2563EB', Shipped: '#06B6D4', 'Out for Delivery': '#0EA5E9', Delivered: '#22C55E', Cancelled: '#EF4444' };
 
   return (
     <div className="page-enter">
@@ -55,10 +55,10 @@ const Dashboard = () => {
 
         {/* Stats */}
         <div className={styles.statsGrid}>
-          <StatCard icon="💰" label="Total Revenue" value={`Rs ${stats?.totalRevenue?.toLocaleString('en-LK') || 0}`} color="#7C3AED" />
-          <StatCard icon="📦" label="Total Orders" value={stats?.totalOrders || 0} color="#EC4899" />
+          <StatCard icon="💰" label="Total Revenue" value={`Rs ${stats?.totalRevenue?.toLocaleString('en-LK') || 0}`} color="#2563EB" />
+          <StatCard icon="📦" label="Total Orders" value={stats?.totalOrders || 0} color="#06B6D4" />
           <StatCard icon="🛍️" label="Products" value={products.length} color="#3B82F6" />
-          <StatCard icon="⭐" label="Recent Orders" value={stats?.recentOrders?.length || 0} color="#F97316" />
+          <StatCard icon="⭐" label="Recent Orders" value={stats?.recentOrders?.length || 0} color="#0EA5E9" />
         </div>
 
         {/* Charts */}
@@ -70,18 +70,18 @@ const Dashboard = () => {
               <ResponsiveContainer width="100%" height={240}>
                 <LineChart data={stats.dailySales}>
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                  <XAxis dataKey="_id" tick={{ fill: '#7A6A9B', fontSize: 12 }} />
-                  <YAxis tick={{ fill: '#7A6A9B', fontSize: 12 }} />
+                  <XAxis dataKey="_id" tick={{ fill: '#64748B', fontSize: 12 }} />
+                  <YAxis tick={{ fill: '#64748B', fontSize: 12 }} />
                   <Tooltip
-                    contentStyle={{ background: '#1A1230', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }}
-                    labelStyle={{ color: '#F1EEF9' }}
-                    itemStyle={{ color: '#9D63F7' }}
+                    contentStyle={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }}
+                    labelStyle={{ color: '#FFFFFF' }}
+                    itemStyle={{ color: '#3B82F6' }}
                   />
-                  <Line type="monotone" dataKey="revenue" stroke="url(#gradient)" strokeWidth={2.5} dot={{ fill: '#7C3AED', strokeWidth: 0, r: 4 }} />
+                  <Line type="monotone" dataKey="revenue" stroke="url(#gradient)" strokeWidth={2.5} dot={{ fill: '#2563EB', strokeWidth: 0, r: 4 }} />
                   <defs>
                     <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#7C3AED" />
-                      <stop offset="100%" stopColor="#EC4899" />
+                      <stop offset="0%" stopColor="#2563EB" />
+                      <stop offset="100%" stopColor="#06B6D4" />
                     </linearGradient>
                   </defs>
                 </LineChart>
@@ -100,8 +100,8 @@ const Dashboard = () => {
                   <Pie data={catData} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value" paddingAngle={3}>
                     {catData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                   </Pie>
-                  <Tooltip contentStyle={{ background: '#1A1230', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }} />
-                  <Legend formatter={(value) => <span style={{ color: '#B8A9D9', fontSize: 12 }}>{value}</span>} />
+                  <Tooltip contentStyle={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8 }} />
+                  <Legend formatter={(value) => <span style={{ color: '#94A3B8', fontSize: 12 }}>{value}</span>} />
                 </PieChart>
               </ResponsiveContainer>
             ) : (

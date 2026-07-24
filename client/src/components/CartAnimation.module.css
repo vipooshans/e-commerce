@@ -21,8 +21,8 @@
   border-radius: 16px;
   border: 2px solid rgba(255, 255, 255, 0.75);
   box-shadow:
-    0 14px 34px rgba(11, 7, 20, 0.5),
-    0 0 24px rgba(124, 58, 237, 0.45);
+    0 14px 34px rgba(2, 6, 23, 0.5),
+    0 0 24px rgba(37, 99, 235, 0.45);
 }
 
 .flyingFallback {
@@ -38,12 +38,12 @@
 }
 
 .particle:nth-of-type(3n) {
-  background: #EC4899;
+  background: #06B6D4;
   border-radius: 50%;
 }
 
 .particle:nth-of-type(3n + 1) {
-  background: #8B5CF6;
+  background: #3B82F6;
   transform: translate(-50%, -50%) rotate(45deg);
 }
 

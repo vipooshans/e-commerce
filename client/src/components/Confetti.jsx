@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const COLORS = ['#7C3AED', '#EC4899', '#3B82F6', '#F97316', '#FBBF24', '#F472B6', '#60A5FA'];
+const COLORS = ['#2563EB', '#06B6D4', '#3B82F6', '#0EA5E9', '#FBBF24', '#38BDF8', '#60A5FA'];
 
 const Confetti = ({ active, onDone }) => {
   const canvasRef = useRef(null);

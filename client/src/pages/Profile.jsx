@@ -170,7 +170,7 @@ const Profile = () => {
                   <input type="email" value={profileForm.email} onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })} className="form-input" id="profile-email" />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">New Password <span style={{ color: '#7A6A9B', fontWeight: 400 }}>(leave blank to keep current)</span></label>
+                  <label className="form-label">New Password <span style={{ color: '#64748B', fontWeight: 400 }}>(leave blank to keep current)</span></label>
                   <input type="password" value={profileForm.password} onChange={(e) => setProfileForm({ ...profileForm, password: e.target.value })} className="form-input" placeholder="New password" id="profile-password" />
                 </div>
                 <button type="submit" className="btn btn-primary" disabled={saving} id="save-profile-btn">{saving ? 'Saving...' : 'Save Changes'}</button>

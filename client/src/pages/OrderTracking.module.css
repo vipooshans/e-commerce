@@ -50,14 +50,14 @@
   font-weight: 700;
 }
 .stepCircle.active {
-  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  background: linear-gradient(135deg, #2563EB, #06B6D4);
   border-color: transparent;
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(124,58,237,0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(37,99,235,0); }
 }
 
 .stepperLine {
@@ -77,11 +77,11 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  color: #7A6A9B;
+  color: #64748B;
 }
-.stepperContent strong { color: #B8A9D9; font-size: 1rem; }
-.stepperContent small { display: block; width: 100%; font-size: 0.8rem; color: #7A6A9B; margin-top: 4px; }
-.activeContent strong { color: #F1EEF9; }
+.stepperContent strong { color: #94A3B8; font-size: 1rem; }
+.stepperContent small { display: block; width: 100%; font-size: 0.8rem; color: #64748B; margin-top: 4px; }
+.activeContent strong { color: #FFFFFF; }
 
 .cancelledBanner {
   padding: 28px;
@@ -110,17 +110,17 @@
   gap: 8px;
   font-size: 0.875rem;
 }
-.itemName { flex: 1; color: #B8A9D9; }
-.itemQty { color: #7A6A9B; }
-.itemPrice { font-weight: 600; color: #F1EEF9; }
+.itemName { flex: 1; color: #94A3B8; }
+.itemQty { color: #64748B; }
+.itemPrice { font-weight: 600; color: #FFFFFF; }
 
 .divider { height: 1px; background: rgba(255,255,255,0.08); }
-.orderTotal { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 600; color: #F1EEF9; }
+.orderTotal { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 600; color: #FFFFFF; }
 
 .infoRows { display: flex; flex-direction: column; gap: 10px; }
 .infoRow { display: flex; justify-content: space-between; font-size: 0.875rem; }
-.infoRow span:first-child { color: #7A6A9B; }
-.infoRow span:last-child { color: #F1EEF9; font-weight: 500; text-align: right; max-width: 60%; }
+.infoRow span:first-child { color: #64748B; }
+.infoRow span:last-child { color: #FFFFFF; font-weight: 500; text-align: right; max-width: 60%; }
 
 @media (max-width: 768px) {
   .detailsGrid { grid-template-columns: 1fr; }

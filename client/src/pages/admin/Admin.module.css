@@ -24,13 +24,13 @@
   align-items: center;
   gap: 16px;
   transition: all 0.3s ease;
-  border-left: 3px solid var(--stat-color, #7C3AED);
+  border-left: 3px solid var(--stat-color, #2563EB);
 }
 .statCard:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 
 .statIcon { font-size: 2rem; }
-.statLabel { font-size: 0.8rem; color: #7A6A9B; text-transform: uppercase; letter-spacing: 0.05em; }
-.statValue { font-size: 1.5rem; font-weight: 800; color: #F1EEF9; margin-top: 2px; }
+.statLabel { font-size: 0.8rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; }
+.statValue { font-size: 1.5rem; font-weight: 800; color: #FFFFFF; margin-top: 2px; }
 
 .chartsGrid {
   display: grid;
@@ -42,7 +42,7 @@
 .chartCard { padding: 24px; }
 .chartCard h3 { margin-bottom: 20px; font-size: 1rem; }
 
-.noData { text-align: center; color: #7A6A9B; padding: 60px 0; font-size: 0.9rem; }
+.noData { text-align: center; color: #64748B; padding: 60px 0; font-size: 0.9rem; }
 
 .recentOrders { padding: 24px; }
 .recentOrders h3 { margin-bottom: 20px; font-size: 1rem; }
@@ -57,12 +57,12 @@
   border-bottom: 1px solid rgba(255,255,255,0.06);
   font-size: 0.875rem;
   align-items: center;
-  color: #B8A9D9;
+  color: #94A3B8;
   transition: background 0.2s;
   text-decoration: none;
 }
 .tableRow:hover { background: rgba(255,255,255,0.03); border-radius: 8px; }
-.tableHead { color: #7A6A9B; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; border-bottom: none; }
+.tableHead { color: #64748B; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; border-bottom: none; }
 
 @media (max-width: 1024px) {
   .statsGrid { grid-template-columns: repeat(2, 1fr); }
@@ -82,7 +82,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(11,7,20,0.8);
+  background: rgba(2,6,23,0.8);
   backdrop-filter: blur(8px);
   z-index: 500;
   display: flex;
@@ -93,7 +93,7 @@
 }
 
 .modal {
-  background: #1A1230;
+  background: #111827;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px;
   width: 100%;
@@ -121,7 +121,7 @@
 .closeBtn {
   background: none;
   border: none;
-  color: #7A6A9B;
+  color: #64748B;
   font-size: 1.1rem;
   cursor: pointer;
   width: 32px;
