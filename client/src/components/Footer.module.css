@@ -1,80 +1,11 @@
 .footer {
-  position: relative;
   margin-top: auto;
   background: #0B0714;
   border-top: 1px solid rgba(255,255,255,0.06);
   padding-top: 60px;
-  overflow: hidden;
-}
-
-.atmosphere {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.wave,
-.wave2 {
-  position: absolute;
-  left: -10%;
-  right: -10%;
-  height: 120px;
-  border-radius: 50%;
-  filter: blur(8px);
-  opacity: 0.35;
-}
-
-.wave {
-  bottom: 40px;
-  background: radial-gradient(ellipse at center, rgba(124,58,237,0.35) 0%, transparent 70%);
-  animation: waveDrift 10s ease-in-out infinite alternate;
-}
-
-.wave2 {
-  bottom: 10px;
-  background: radial-gradient(ellipse at center, rgba(236,72,153,0.25) 0%, transparent 70%);
-  animation: waveDrift 14s ease-in-out infinite alternate-reverse;
-}
-
-.stars {
-  position: absolute;
-  inset: 0;
-}
-
-.star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #F1EEF9;
-  box-shadow: 0 0 8px rgba(157, 99, 247, 0.8);
-  animation: twinkle 2.8s ease-in-out infinite;
-}
-
-.gradientLight {
-  position: absolute;
-  top: -40%;
-  right: -10%;
-  width: 320px;
-  height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124,58,237,0.2) 0%, transparent 70%);
-  filter: blur(20px);
-  animation: glowPulse 8s ease-in-out infinite;
-}
-
-.glassPanel {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 16px;
-  padding: 16px;
-  backdrop-filter: blur(10px);
 }
 
 .inner {
-  position: relative;
-  z-index: 1;
   display: grid;
   grid-template-columns: 1.5fr 2fr;
   gap: 48px;
@@ -96,6 +27,13 @@
   font-size: 1.4rem;
   font-weight: 800;
 }
+.logoGem {
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .socials {
   display: flex;
@@ -112,14 +50,14 @@
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
-  transition: all 0.25s ease;
+  transition: all 0.2s;
 }
 .socialBtn:hover { background: rgba(124,58,237,0.2); border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
 
 .links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 32px;
 }
 
 .linkGroup h4 {
@@ -140,8 +78,6 @@
 .linkGroup a:hover { color: #B8A9D9; }
 
 .bottom {
-  position: relative;
-  z-index: 1;
   border-top: 1px solid rgba(255,255,255,0.06);
   padding: 20px 0;
 }
@@ -156,26 +92,6 @@
 .payIcon {
   font-size: 1.2rem;
   opacity: 0.6;
-  animation: floatPay 3.5s ease-in-out infinite;
-}
-.payIcon:nth-child(2) { animation-delay: 0.4s; }
-.payIcon:nth-child(3) { animation-delay: 0.8s; }
-
-@keyframes waveDrift {
-  from { transform: translateX(-3%) scaleX(1); }
-  to { transform: translateX(3%) scaleX(1.05); }
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0.25; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.3); }
-}
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-@keyframes floatPay {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
 }
 
 @media (max-width: 768px) {
@@ -185,10 +101,4 @@
 }
 @media (max-width: 480px) {
   .links { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wave, .wave2, .star, .gradientLight, .payIcon {
-    animation: none;
-  }
 }

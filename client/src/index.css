@@ -94,22 +94,6 @@ ul { list-style: none; }
 
 #root { display: flex; flex-direction: column; min-height: 100vh; }
 
-.app-shell {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-html.cursor-fx,
-html.cursor-fx body,
-html.cursor-fx a,
-html.cursor-fx button,
-html.cursor-fx .btn {
-  cursor: none !important;
-}
-
 /* ─────────────────────────────────────────
    TYPOGRAPHY
 ───────────────────────────────────────── */

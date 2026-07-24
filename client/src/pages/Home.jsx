@@ -2,7 +2,6 @@ import { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getFeaturedProducts } from '../services/productService';
 import ProductCard from '../components/ProductCard';
-import CategoryCard from '../components/CategoryCard';
 import Loader from '../components/Loader';
 import styles from './Home.module.css';
 
@@ -31,6 +30,7 @@ const Home = () => {
 
   return (
     <div className="page-enter">
+      {/* ── Premium 3D Hero (layout preserved) ── */}
       <Suspense
         fallback={
           <section className={styles.hero}>
@@ -59,6 +59,7 @@ const Home = () => {
         <Hero3D />
       </Suspense>
 
+      {/* ── Categories ── */}
       <section className="section-sm">
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -67,19 +68,23 @@ const Home = () => {
           </div>
           <div className={styles.categoryGrid}>
             {CATEGORIES.map((cat) => (
-              <CategoryCard
+              <button
                 key={cat.name}
-                name={cat.name}
-                icon={cat.icon}
-                color={cat.color}
+                className={styles.catCard}
                 onClick={() => navigate(`/products?category=${encodeURIComponent(cat.name)}`)}
                 id={`cat-${cat.name.replace(/\s+/g, '-').toLowerCase()}`}
-              />
+              >
+                <span className={styles.catIcon} style={{ background: `${cat.color}20`, color: cat.color }}>
+                  {cat.icon}
+                </span>
+                <span className={styles.catName}>{cat.name}</span>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
+      {/* ── Featured Products ── */}
       <section className="section">
         <div className="container">
           <div className={styles.sectionHeader}>
@@ -96,13 +101,14 @@ const Home = () => {
         </div>
       </section>
 
+      {/* ── Banner ── */}
       <section className="section-sm">
         <div className="container">
           <div className={styles.banner}>
             <div className={styles.bannerContent}>
               <h2>Mid-Season Sale — Up to <span className="gradient-text">10% Off</span></h2>
               <p>Featured electronics, fashion & beauty. Free shipping on orders over Rs 9999.</p>
-              <Link to="/products?isFeatured=true" className="btn btn-coral btn-lg" id="banner-shop-btn" data-magnetic>
+              <Link to="/products?isFeatured=true" className="btn btn-coral btn-lg" id="banner-shop-btn">
                 Shop the Sale
               </Link>
             </div>
