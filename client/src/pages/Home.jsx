@@ -151,14 +151,14 @@ const Home = () => {
         <div className="container">
           <div className={styles.banner}>
             <div className={styles.bannerContent}>
-              <h2>Free Shipping on Orders Over <span className="gradient-text">Rs 999</span></h2>
-              <p>Plus 30-day hassle-free returns on all products</p>
-              <Link to="/products" className="btn btn-coral btn-lg" id="banner-shop-btn">
-                Start Shopping
+              <h2>Mid-Season Sale — Up to <span className="gradient-text">10% Off</span></h2>
+              <p>Featured electronics, fashion & beauty. Free shipping on orders over Rs 9999.</p>
+              <Link to="/products?isFeatured=true" className="btn btn-coral btn-lg" id="banner-shop-btn">
+                Shop the Sale
               </Link>
             </div>
             <div className={styles.bannerIcons}>
-              {['🚚', '🔒', '↩️', '⭐'].map((icon, i) => (
+              {['🔥', '🚚', '💳', '⭐'].map((icon, i) => (
                 <div key={i} className={styles.bannerIcon} style={{ animationDelay: `${i * 0.2}s` }}>
                   {icon}
                 </div>
