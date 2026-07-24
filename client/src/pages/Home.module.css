@@ -6,6 +6,24 @@
   overflow: hidden;
 }
 
+/* Scroll pin shell — visual layout unchanged */
+.heroScroll {
+  min-height: 0 !important;
+  height: 320vh;
+  display: block;
+  overflow: visible !important;
+  align-items: stretch;
+}
+
+.heroSticky {
+  position: sticky;
+  top: 0;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
 .heroBg {
   position: absolute;
   inset: 0;
@@ -41,11 +59,9 @@
   font-weight: 600;
   color: #9D63F7;
   width: fit-content;
-  animation: fadeInUp 0.6s ease both;
 }
 
 .heroText h1 {
-  animation: fadeInUp 0.6s 0.1s ease both;
   line-height: 1.1;
 }
 
@@ -53,21 +69,53 @@
   font-size: 1.05rem;
   line-height: 1.7;
   max-width: 460px;
-  animation: fadeInUp 0.6s 0.2s ease both;
 }
 
 .heroBtns {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  animation: fadeInUp 0.6s 0.3s ease both;
 }
 
 .heroStats {
   display: flex;
   gap: 32px;
   padding-top: 8px;
-  animation: fadeInUp 0.6s 0.4s ease both;
+}
+
+.shineText {
+  position: relative;
+  background-size: 200% 100%;
+  animation: gradientShine 8s ease-in-out infinite;
+}
+
+.heroCta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.heroCta:hover {
+  filter: drop-shadow(0 8px 22px rgba(124, 58, 237, 0.35));
+}
+
+.btnRippleHost {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.btnRipple {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: btnRipple 0.65s ease-out forwards;
 }
 .stat { display: flex; flex-direction: column; gap: 2px; }
 .statVal {
@@ -96,6 +144,8 @@
   background: radial-gradient(ellipse, rgba(124,58,237,0.3) 0%, rgba(236,72,153,0.15) 50%, transparent 70%);
   animation: pulse-glow 4s ease-in-out infinite;
   position: absolute;
+  will-change: transform, opacity;
+  transition: transform 0.05s linear;
 }
 
 .shoeRing {
@@ -142,21 +192,20 @@
   perspective: 900px;
 }
 
-.heroShoe {
+.heroCanvas {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
   border-radius: 42% 58% 48% 52% / 58% 42% 58% 42%;
+  overflow: hidden;
   box-shadow:
     0 28px 60px rgba(0, 0, 0, 0.34),
     0 0 0 1px rgba(255, 255, 255, 0.12);
-  cursor: grab;
-  will-change: transform;
 }
 
-.heroShoe:active {
-  cursor: grabbing;
+.heroCanvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .shoeShadow {
@@ -182,10 +231,10 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #F1EEF9;
-  animation: float 3s ease-in-out infinite;
   white-space: nowrap;
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   z-index: 3;
+  will-change: transform;
 }
 
 .cardTop { top: 10%; left: 0; }
@@ -299,12 +348,22 @@
 }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.05); opacity: 1; }
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
+}
+@keyframes gradientShine {
+  0%, 70%, 100% { background-position: 0% 50%; filter: brightness(1); }
+  85% { background-position: 100% 50%; filter: brightness(1.25); }
+}
+@keyframes btnRipple {
+  to {
+    transform: scale(28);
+    opacity: 0;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -317,6 +376,8 @@
   .shoeRing { width: 260px; height: 260px; }
   .floatingCard { padding: 10px 14px; font-size: 0.78rem; }
   .hero { min-height: 70vh; }
+  .heroSticky { min-height: 70vh; }
+  .heroScroll { height: 260vh; }
   .categoryGrid { grid-template-columns: repeat(3, 1fr); }
   .banner { flex-direction: column; padding: 32px 24px; }
   .bannerIcons { justify-content: center; }
@@ -330,7 +391,16 @@
 
 @media (prefers-reduced-motion: reduce) {
   .floatingCard,
-  .glowOrb {
+  .glowOrb,
+  .shineText {
     animation: none;
+  }
+
+  .heroScroll {
+    height: auto;
+  }
+
+  .heroSticky {
+    position: relative;
   }
 }

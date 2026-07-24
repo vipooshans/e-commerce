@@ -1,5 +1,6 @@
+import { lazy, Suspense, useCallback, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { ToastProvider } from './context/ToastContext';
@@ -23,6 +24,19 @@ import Profile from './pages/Profile';
 import Dashboard from './pages/admin/Dashboard';
 import ProductManager from './pages/admin/ProductManager';
 import OrderManager from './pages/admin/OrderManager';
+
+const LoadingScreen = lazy(() => import('./components/LoadingScreen'));
+
+const BOOT_KEY = 'ebg_boot_seen';
+
+function BootLoader({ onComplete }) {
+  const { loading } = useAuth();
+  return (
+    <Suspense fallback={null}>
+      <LoadingScreen ready={!loading} onComplete={onComplete} />
+    </Suspense>
+  );
+}
 
 const AppContent = () => (
   <BrowserRouter>
@@ -64,11 +78,29 @@ const AppContent = () => (
 );
 
 function App() {
+  const [showBoot, setShowBoot] = useState(() => {
+    try {
+      return sessionStorage.getItem(BOOT_KEY) !== '1';
+    } catch {
+      return true;
+    }
+  });
+
+  const handleBootComplete = useCallback(() => {
+    try {
+      sessionStorage.setItem(BOOT_KEY, '1');
+    } catch {
+      /* ignore quota / private mode */
+    }
+    setShowBoot(false);
+  }, []);
+
   return (
     <AuthProvider>
       <ToastProvider>
         <CartProvider>
           <WishlistProvider>
+            {showBoot && <BootLoader onComplete={handleBootComplete} />}
             <AppContent />
           </WishlistProvider>
         </CartProvider>

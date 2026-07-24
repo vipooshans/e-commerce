@@ -1,0 +1,117 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(124, 58, 237, 0.28) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 70%, rgba(236, 72, 153, 0.14) 0%, transparent 50%),
+    #0B0714;
+  transition: opacity 0.55s ease, visibility 0.55s ease;
+}
+
+.overlayExit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  width: min(420px, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.canvasWrap {
+  width: 100%;
+  height: min(320px, 46vh);
+}
+
+.canvasWrap canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.logoWrap {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: logoFloat 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.logo {
+  height: clamp(40px, 8vw, 56px);
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(124, 58, 237, 0.45));
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: -8px;
+}
+
+.label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #B8A9D9;
+}
+
+.track {
+  width: 148px;
+  height: 3px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  width: 35%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7C3AED, #EC4899);
+  animation: progressSlide 1.35s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+@keyframes progressSlide {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoWrap,
+  .fill {
+    animation: none;
+  }
+
+  .fill {
+    width: 70%;
+    transform: none;
+  }
+}
