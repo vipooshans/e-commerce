@@ -19,30 +19,40 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Middleware
+// Middleware — allow local, FRONTEND_URL(s), and Vercel preview/production hosts
 const allowedOrigins = [
   'http://localhost:5173',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
+  'https://e-commerce-blush-mu-85.vercel.app',
+  ...(process.env.FRONTEND_URL || '')
+    .split(',')
+    .map((url) => url.trim())
+    .filter(Boolean),
+];
 
 app.use(cors({
   origin: (origin, callback) => {
+    // Non-browser clients (Postman, server-to-server) send no Origin
     if (!origin) return callback(null, true);
 
     const isLocalDevelopmentOrigin =
       process.env.NODE_ENV !== 'production' &&
       /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
-    const isAllowed = allowedOrigins.includes(origin) ||
+
+    // Any Vercel deployment (preview or production) for this project
+    const isVercelOrigin = /^https:\/\/[\w-]+\.vercel\.app$/.test(origin);
+
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
       isLocalDevelopmentOrigin ||
-      (origin.endsWith('.vercel.app') && origin.includes('vipooshan'));
+      isVercelOrigin;
 
     if (isAllowed) {
       callback(null, true);
     } else {
-      callback(null, false); // Using false instead of Error avoids printing scary stack traces in logs
+      callback(null, false); // false avoids noisy stack traces; browser still blocks
     }
   },
-  credentials: true
+  credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
