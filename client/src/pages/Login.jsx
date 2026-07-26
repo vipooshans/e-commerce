@@ -64,12 +64,6 @@ const Login = () => {
             />
           </div>
 
-          <div className={styles.testCreds}>
-            <p>🧪 Test credentials:</p>
-            <p>Admin: <code>admin@lumora.com</code> / <code>Admin@123</code></p>
-            <p>User: <code>test@lumora.com</code> / <code>Test@123</code></p>
-          </div>
-
           <button type="submit" className="btn btn-primary" disabled={loading} id="login-submit-btn" style={{ width: '100%' }}>
             {loading ? 'Signing in...' : 'Sign In →'}
           </button>
