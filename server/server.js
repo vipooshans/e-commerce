@@ -19,14 +19,42 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Middleware — allow local, FRONTEND_URL(s), and Vercel preview/production hosts
+const normalizeOrigin = (url) => {
+  try {
+    const parsed = new URL(url);
+    return `${parsed.protocol}//${parsed.host}`;
+  } catch {
+    return url.replace(/\/$/, '');
+  }
+};
+
+const withWwwVariants = (origin) => {
+  try {
+    const parsed = new URL(origin);
+    const hosts = parsed.hostname.startsWith('www.')
+      ? [parsed.hostname, parsed.hostname.slice(4)]
+      : [parsed.hostname, `www.${parsed.hostname}`];
+    return [...new Set(hosts.map((host) => `${parsed.protocol}//${host}${parsed.port ? `:${parsed.port}` : ''}`))];
+  } catch {
+    return [origin];
+  }
+};
+
+// Middleware — allow local, custom domain, FRONTEND_URL(s), and Vercel hosts
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://e-commerce-blush-mu-85.vercel.app',
-  ...(process.env.FRONTEND_URL || '')
-    .split(',')
-    .map((url) => url.trim())
-    .filter(Boolean),
+  ...new Set(
+    [
+      'http://localhost:5173',
+      'https://e-commerce-blush-mu-85.vercel.app',
+      'https://www.everbuyglobal.online',
+      'https://everbuyglobal.online',
+      ...(process.env.FRONTEND_URL || '').split(','),
+    ]
+      .map((url) => url.trim())
+      .filter(Boolean)
+      .map(normalizeOrigin)
+      .flatMap(withWwwVariants)
+  ),
 ];
 
 app.use(cors({
@@ -34,17 +62,20 @@ app.use(cors({
     // Non-browser clients (Postman, server-to-server) send no Origin
     if (!origin) return callback(null, true);
 
+    const normalizedOrigin = normalizeOrigin(origin);
+
     const isLocalDevelopmentOrigin =
       process.env.NODE_ENV !== 'production' &&
-      /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
+      /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(normalizedOrigin);
 
-    // Any Vercel deployment (preview or production)
-    const isVercelOrigin = /^https:\/\/[\w.-]+\.vercel\.app$/i.test(origin);
+    const isVercelOrigin = /^https:\/\/[\w.-]+\.vercel\.app$/i.test(normalizedOrigin);
+    const isEverBuyOrigin = /^https:\/\/(www\.)?everbuyglobal\.online$/i.test(normalizedOrigin);
 
     const isAllowed =
-      allowedOrigins.includes(origin) ||
+      allowedOrigins.includes(normalizedOrigin) ||
       isLocalDevelopmentOrigin ||
-      isVercelOrigin;
+      isVercelOrigin ||
+      isEverBuyOrigin;
 
     if (isAllowed) {
       callback(null, true);
@@ -80,4 +111,5 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`CORS allowed origins: ${allowedOrigins.join(', ')}`);
 });
