@@ -62,7 +62,7 @@ const CheckoutForm = () => {
         orderItems.map(item => `- ${item.name} × ${item.qty} (Rs. ${(item.price * item.qty).toLocaleString('en-LK')})`).join('\n') + `\n\n` +
         `💵 *Total Amount:* Rs. ${totalPrice.toLocaleString('en-LK')}`;
 
-      const whatsappUrl = `https://wa.me/94772078909?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/94752971826?text=${encodeURIComponent(message)}`;
       
       clearCart();
       window.open(whatsappUrl, '_blank');

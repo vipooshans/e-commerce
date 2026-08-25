@@ -14,8 +14,8 @@ const createAdmin = async () => {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ Connected to MongoDB database.');
 
-    const adminEmail = process.argv[2] || 'admin@lumora.com';
-    const adminPassword = process.argv[3] || 'AdminPass123!';
+    const adminEmail = process.argv[2] || 'samsanjeevan587@gmail.com';
+    const adminPassword = process.argv[3] || 'Admin@123';
     const adminName = 'System Administrator';
 
     if (adminPassword.length < 6) {
@@ -27,13 +27,13 @@ const createAdmin = async () => {
     const userExists = await User.findOne({ email: adminEmail.toLowerCase() });
 
     if (userExists) {
-      if (userExists.isAdmin) {
-        console.log(`ℹ️ Admin user with email "${adminEmail}" already exists.`);
+      const wasAdmin = userExists.isAdmin;
+      userExists.isAdmin = true;
+      userExists.password = adminPassword; // hashed in user pre-save hook
+      await userExists.save();
+      if (wasAdmin) {
+        console.log(`✅ Admin user "${adminEmail}" updated with the specified password.`);
       } else {
-        // Upgrade existing user to Admin
-        userExists.isAdmin = true;
-        userExists.password = adminPassword; // It will hash inside user pre-save hook
-        await userExists.save();
         console.log(`✅ Existing user "${adminEmail}" upgraded to Admin with the specified password!`);
       }
     } else {

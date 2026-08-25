@@ -66,7 +66,7 @@ VITE_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
 npm run seed
 ```
 This creates:
-- **Admin**: `admin@lumora.com` / `Admin@123`
+- **Admin**: `samsanjeevan587@gmail.com` / `Admin@123`
 - **User**: `test@lumora.com` / `Test@123`
 - 30 sample products across 6 categories
 

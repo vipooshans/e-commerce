@@ -19,7 +19,7 @@ connectDB();
 const users = [
   {
     name: 'Admin User',
-    email: 'admin@lumora.com',
+    email: 'samsanjeevan587@gmail.com',
     password: 'Admin@123',
     isAdmin: true,
   },
@@ -482,7 +482,7 @@ const importData = async () => {
     );
 
     console.log(`✅ Created ${createdUsers.length} users`);
-    console.log('   Admin : admin@lumora.com  / Admin@123');
+    console.log('   Admin : samsanjeevan587@gmail.com  / Admin@123');
     console.log('   Test  : test@lumora.com   / Test@123');
 
     const createdProducts = await Product.insertMany(products);
