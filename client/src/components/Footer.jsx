@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -9,7 +10,7 @@ const Footer = () => {
         {/* Brand */}
         <div className={styles.brand}>
           <Link to="/" className={styles.logo}>
-            <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '35px', objectFit: 'contain' }} />
+            <Logo height={35} />
           </Link>
           <p>Discover a curated universe of products crafted for modern living.</p>
           <div className={styles.socials}>

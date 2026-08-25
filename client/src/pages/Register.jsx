@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
+import Logo from '../components/Logo';
 import styles from './Auth.module.css';
 
 const Register = () => {
@@ -35,7 +36,7 @@ const Register = () => {
       <div className={styles.bgGlow} />
       <div className={styles.card}>
         <div className={styles.logo}>
-          <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '48px', objectFit: 'contain', marginBottom: '10px' }} />
+          <Logo height={48} />
         </div>
         <h2>Create Account</h2>
         <p>Join EverBuyGlobal and start shopping</p>

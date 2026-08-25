@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { CART_ANIMATION_EVENT } from '../utils/cartAnimation';
+import Logo from './Logo';
 import styles from './Navbar.module.css';
 
 const AnimatedCartLink = ({ itemCount }) => {
@@ -72,7 +73,7 @@ const Navbar = () => {
       <div className={`container ${styles.inner}`}>
         {/* Logo */}
         <Link to="/" className={styles.logo}>
-          <img src="/logo.png" alt="EverBuyGlobal Logo" style={{ height: '42px', objectFit: 'contain' }} />
+          <Logo height={42} />
         </Link>
 
         {/* Search bar (desktop) */}

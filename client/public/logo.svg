@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 168" fill="none" role="img" aria-labelledby="ebgLogoTitle">
+  <title id="ebgLogoTitle">EverBuy Global</title>
+  <defs>
+    <linearGradient id="ebgStroke" x1="16" y1="12" x2="148" y2="148" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="ebgGlobe" x1="52" y1="40" x2="124" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E3A8A"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+    <linearGradient id="ebgLand" x1="52" y1="40" x2="124" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC"/>
+      <stop offset="1" stop-color="#22D3EE"/>
+    </linearGradient>
+    <clipPath id="ebgGlobeClip">
+      <circle cx="86" cy="74" r="30"/>
+    </clipPath>
+    <filter id="ebgGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Cart handle -->
+  <path
+    d="M28 46c-1-16 10-30 28-30 12 0 22 8 26 20"
+    stroke="url(#ebgStroke)"
+    stroke-width="6.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Cart basket -->
+  <path
+    d="M36 52h98l-10 58H50z"
+    stroke="url(#ebgStroke)"
+    stroke-width="6.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Wheels -->
+  <circle cx="62" cy="128" r="9.5" stroke="url(#ebgStroke)" stroke-width="6.5"/>
+  <circle cx="118" cy="128" r="9.5" stroke="url(#ebgStroke)" stroke-width="6.5"/>
+
+  <!-- Globe -->
+  <g filter="url(#ebgGlow)">
+    <circle cx="86" cy="74" r="30" fill="url(#ebgGlobe)" stroke="#38BDF8" stroke-width="1.6"/>
+    <g clip-path="url(#ebgGlobeClip)" fill="url(#ebgLand)">
+      <!-- Americas -->
+      <path d="M64 58c5-7 13-6 15 1 2 7-1 13-4 18-2 4-7 6-11 3-5-3-6-10-4-16 1-3 2-5 4-6z"/>
+      <path d="M68 86c3-1 6 1 7 4 1 4-1 7-4 8-3 1-6-1-7-4-1-3 1-7 4-8z"/>
+      <!-- Europe / Africa -->
+      <path d="M88 52c6-2 11 3 11 9 0 5-3 8-3 12 2 5 0 10-4 13-5 3-10 1-12-4-2-6 1-11 3-16 1-5 1-12 5-14z"/>
+      <!-- Asia -->
+      <path d="M104 58c7 0 13 5 12 12-1 5-5 8-10 9-4 1-7-2-7-6 0-5 2-9 5-15z"/>
+      <!-- Australia -->
+      <ellipse cx="108" cy="92" rx="7" ry="4.2"/>
+    </g>
+    <ellipse cx="86" cy="74" rx="13" ry="30" stroke="#7DD3FC" stroke-width="1" opacity=".35"/>
+    <path d="M56 74h60M86 44v60" stroke="#7DD3FC" stroke-width="1" opacity=".28"/>
+    <path d="M58 60c18-8 38-8 56 0M58 88c18 8 38 8 56 0" stroke="#7DD3FC" stroke-width="1" opacity=".22"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g fill="#60A5FA">
+    <text x="168" y="78" font-family="Outfit, Inter, Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-0.03em">EverBuy</text>
+    <text x="168" y="128" font-family="Outfit, Inter, Segoe UI, Arial, sans-serif" font-size="46" font-weight="700" letter-spacing="-0.03em">Global</text>
+  </g>
+</svg>
