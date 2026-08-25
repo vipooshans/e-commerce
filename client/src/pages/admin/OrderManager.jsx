@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllOrders, updateOrderStatus } from '../../services/orderService';
+import { getAllOrders, updateOrderPayment, updateOrderStatus } from '../../services/orderService';
 import { useToast } from '../../context/ToastContext';
 import Loader from '../../components/Loader';
 import styles from './Admin.module.css';
@@ -26,6 +26,18 @@ const OrderManager = () => {
       await updateOrderStatus(orderId, newStatus);
       setOrders((prev) => prev.map((o) => o._id === orderId ? { ...o, orderStatus: newStatus } : o));
       addToast(`Order status updated to ${newStatus}`, 'success');
+    } catch (err) { addToast(err, 'error'); }
+  };
+
+  const handlePaymentChange = async (orderId, isPaid) => {
+    try {
+      const updated = await updateOrderPayment(orderId, isPaid);
+      setOrders((prev) => prev.map((o) => (
+        o._id === orderId
+          ? { ...o, isPaid: updated.isPaid, paidAt: updated.paidAt }
+          : o
+      )));
+      addToast(`Payment marked as ${isPaid ? 'Paid' : 'Unpaid'}`, 'success');
     } catch (err) { addToast(err, 'error'); }
   };
 
@@ -69,7 +81,20 @@ const OrderManager = () => {
                   <span>{order.user?.name || '—'}<br /><small style={{ color: '#64748B' }}>{order.user?.email}</small></span>
                   <span style={{ fontWeight: 600, color: '#FFFFFF' }}>Rs {order.totalPrice.toLocaleString('en-LK')}</span>
                   <span>
-                    <span className={`badge ${order.isPaid ? 'badge-green' : 'badge-coral'}`}>{order.isPaid ? 'Paid' : 'Unpaid'}</span>
+                    <select
+                      value={order.isPaid ? 'paid' : 'unpaid'}
+                      onChange={(e) => handlePaymentChange(order._id, e.target.value === 'paid')}
+                      className="form-select"
+                      style={{
+                        padding: '6px 10px',
+                        fontSize: '0.8rem',
+                        color: order.isPaid ? '#22C55E' : '#F97316',
+                      }}
+                      id={`payment-select-${order._id}`}
+                    >
+                      <option value="unpaid">Unpaid</option>
+                      <option value="paid">Paid</option>
+                    </select>
                   </span>
                   <span>
                     <select

@@ -6,6 +6,7 @@ import {
   getOrderById,
   payOrder,
   confirmStripePayment,
+  updateOrderPayment,
   updateOrderStatus,
   getOrderStats,
 } from '../controllers/orderController.js';
@@ -19,6 +20,7 @@ router.get('/stats', protect, admin, getOrderStats);
 router.route('/:id').get(protect, getOrderById);
 router.put('/:id/pay', protect, payOrder);
 router.put('/:id/pay/confirm', protect, confirmStripePayment);
+router.put('/:id/pay/admin', protect, admin, updateOrderPayment);
 router.put('/:id/status', protect, admin, updateOrderStatus);
 
 export default router;

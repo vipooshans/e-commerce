@@ -160,6 +160,41 @@ export const confirmStripePayment = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Mark order paid or unpaid (admin)
+// @route   PUT /api/orders/:id/pay/admin
+// @access  Admin
+export const updateOrderPayment = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (!order) {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+
+  const { isPaid } = req.body;
+  if (typeof isPaid !== 'boolean') {
+    res.status(400);
+    throw new Error('isPaid must be true or false');
+  }
+
+  if (isPaid) {
+    order.isPaid = true;
+    order.paidAt = new Date();
+    order.paymentResult = {
+      id: order.paymentResult?.id || `ADMIN-${Date.now()}`,
+      status: 'Marked paid by admin',
+      update_time: new Date().toISOString(),
+      email_address: req.user.email,
+    };
+  } else {
+    order.isPaid = false;
+    order.paidAt = undefined;
+    order.paymentResult = undefined;
+  }
+
+  const updated = await order.save();
+  res.json(updated);
+});
+
 // @desc    Update order status (admin)
 // @route   PUT /api/orders/:id/status
 // @access  Admin
