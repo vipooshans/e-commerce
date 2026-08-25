@@ -2,6 +2,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { RoundedBox } from '@react-three/drei';
 import { useReducedMotion } from 'framer-motion';
+import Logo from './Logo';
 import styles from './LoadingScreen.module.css';
 
 const MIN_VISIBLE_MS = 2200;
@@ -159,7 +160,7 @@ export default function LoadingScreen({ onComplete, ready = true }) {
     >
       <div className={styles.inner}>
         <div className={styles.logoWrap}>
-          <img src="/logo.png" alt="EverBuyGlobal" className={styles.logo} />
+          <Logo className={styles.logo} />
         </div>
 
         <div className={styles.canvasWrap}>
