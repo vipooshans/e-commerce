@@ -11,12 +11,13 @@ export const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please provide name, email and password');
   }
-  const userExists = await User.findOne({ email });
+  const normalizedEmail = email.toLowerCase().trim();
+  const userExists = await User.findOne({ email: normalizedEmail });
   if (userExists) {
     res.status(400);
     throw new Error('User already exists with this email');
   }
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ name, email: normalizedEmail, password });
   res.status(201).json({
     _id: user._id,
     name: user.name,
@@ -35,7 +36,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please provide email and password');
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email.toLowerCase().trim() });
   if (!user || !(await user.matchPassword(password))) {
     res.status(401);
     throw new Error('Invalid email or password');

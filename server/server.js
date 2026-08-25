@@ -13,6 +13,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
 
+if (!process.env.JWT_SECRET) {
+  console.error('❌ JWT_SECRET is not set. Login and protected routes will fail until it is added in the host environment.');
+}
+
 connectDB();
 
 const app = express();
