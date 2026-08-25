@@ -1,0 +1,14 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Existing files and folders (JS, CSS, images) are served as-is
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# React Router paths such as /login, /products, /cart
+RewriteRule ^ index.html [L]
+
+# Fallback if rewrite is unavailable
+ErrorDocument 404 /index.html
